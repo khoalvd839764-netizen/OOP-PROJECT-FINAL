@@ -8,11 +8,11 @@
 
 | Task | Module / File phụ trách | Người thực hiện (Assignee) | Trạng thái |
 | :---: | :--- | :--- | :---: |
-| **Task 1** | **Lớp cha `Product`** (`Product.h`, `Product.cpp`) | `👤 [ Điền tên bạn ... ]` | ⏳ Chưa xong |
-| **Task 2** | **Lớp con `FoodProduct`** (`FoodProduct.h`, `FoodProduct.cpp`) | `👤 [ Điền tên bạn ... ]` | ⏳ Chưa xong |
-| **Task 3** | **Lớp con `ElectronicsProduct`** (`ElectronicsProduct.h`, `ElectronicsProduct.cpp`) | `👤 [ Điền tên bạn ... ]` | ⏳ Chưa xong |
-| **Task 4** | **Lớp con `ClothingProduct`** (`ClothingProduct.h`, `ClothingProduct.cpp`) | `👤 [ Điền tên bạn ... ]` | ⏳ Chưa xong |
-| **Task 5** | **Viết code Test nghiệm thu** (`main.cpp`, kiểm tra build) | `👤 [ Điền tên Leader ... ]` | ⏳ Chưa xong |
+| **Task 1** | **Lớp cha `Product`** (`Product.h`, `Product.cpp`) | `👤 [ ĐĂNG KHOA ]` | ⏳ Chưa xong |
+| **Task 2** | **Lớp con `FoodProduct`** (`FoodProduct.h`, `FoodProduct.cpp`) | `👤 [ TUẤN PHONG ]` | ⏳ Chưa xong |
+| **Task 3** | **Lớp con `ElectronicsProduct`** (`ElectronicsProduct.h`, `ElectronicsProduct.cpp`) | `👤 [ TRƯỜNG ]` | ⏳ Chưa xong |
+| **Task 4** | **Lớp con `ClothingProduct`** (`ClothingProduct.h`, `ClothingProduct.cpp`) | `👤 [ KIM HUỆ ]` | ⏳ Chưa xong |
+| **Task 5** | **Viết code Test nghiệm thu** (`main.cpp`, kiểm tra build) | `👤 [ ĐĂNG KHOA ]` | ⏳ Chưa xong |
 
 ---
 
@@ -21,7 +21,7 @@
 ---
 
 ### 🔹 TASK 1: Lớp Cha Cơ Sở `Product` (Abstract Base Class)
-* **👤 Người thực hiện:** `[ Điền tên ]`
+* **👤 Người thực hiện:** `ĐĂNG KHOA`
 * **📁 File cần code:** `models/Product.h` và `models/Product.cpp`
 * **Nhiệm vụ cụ thể:**
   - [ ] Khai báo 5 thuộc tính `protected`: `id` (string), `name` (string), `price` (double), `stockQuantity` (int), `category` (string).
@@ -40,7 +40,7 @@
 ---
 
 ### 🔹 TASK 2: Lớp Con Thực Phẩm `FoodProduct`
-* **👤 Người thực hiện:** `[ Điền tên ]`
+* **👤 Người thực hiện:** `TUẤN PHONG`
 * **📁 File cần code:** `models/FoodProduct.h` và `models/FoodProduct.cpp`
 * **Nhiệm vụ cụ thể:**
   - [ ] Kế thừa lớp cha: `class FoodProduct : public Product`.
@@ -56,7 +56,7 @@
 ---
 
 ### 🔹 TASK 3: Lớp Con Đồ Điện Tử `ElectronicsProduct`
-* **👤 Người thực hiện:** `[ Điền tên ]`
+* **👤 Người thực hiện:** `TRƯỜNG`
 * **📁 File cần code:** `models/ElectronicsProduct.h` và `models/ElectronicsProduct.cpp`
 * **Nhiệm vụ cụ thể:**
   - [ ] Kế thừa lớp cha: `class ElectronicsProduct : public Product`.
@@ -72,7 +72,7 @@
 ---
 
 ### 🔹 TASK 4: Lớp Con Thời Trang `ClothingProduct`
-* **👤 Người thực hiện:** `[ Điền tên ]`
+* **👤 Người thực hiện:** `KIM HUỆ`
 * **📁 File cần code:** `models/ClothingProduct.h` và `models/ClothingProduct.cpp`
 * **Nhiệm vụ cụ thể:**
   - [ ] Kế thừa lớp cha: `class ClothingProduct : public Product`.
@@ -88,7 +88,7 @@
 ---
 
 ### 🔹 TASK 5: Test & Nghiệm Thu Nhóm Sản Phẩm (Dành cho Leader)
-* **👤 Người thực hiện:** `[ Điền tên Leader ]`
+* **👤 Người thực hiện:** `ĐĂNG KHOA (Leader)`
 * **📁 File cần code:** `main.cpp`
 * **Nhiệm vụ cụ thể:**
   - [ ] Ghép 4 task trên lại và viết code test trong `main.cpp`:

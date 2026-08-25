@@ -8,7 +8,7 @@
 
 | Task | Module / File phụ trách | Người thực hiện (Assignee) | Trạng thái |
 | :---: | :--- | :--- | :---: |
-| **Task 1** | **Lớp cha `Product`** (`Product.h`, `Product.cpp`) | `👤 [ ĐĂNG KHOA ]` | ⏳ Chưa xong |
+| **Task 1** | **Lớp cha `Product`** (`Product.h`, `Product.cpp`) | `👤 [ ĐĂNG KHOA ]` | ✅ Đã hoàn thành |
 | **Task 2** | **Lớp con `FoodProduct`** (`FoodProduct.h`, `FoodProduct.cpp`) | `👤 [ TUẤN PHONG ]` | ⏳ Chưa xong |
 | **Task 3** | **Lớp con `ElectronicsProduct`** (`ElectronicsProduct.h`, `ElectronicsProduct.cpp`) | `👤 [ TRƯỜNG ]` | ⏳ Chưa xong |
 | **Task 4** | **Lớp con `ClothingProduct`** (`ClothingProduct.h`, `ClothingProduct.cpp`) | `👤 [ KIM HUỆ ]` | ⏳ Chưa xong |
@@ -24,18 +24,18 @@
 * **👤 Người thực hiện:** `ĐĂNG KHOA`
 * **📁 File cần code:** `models/Product.h` và `models/Product.cpp`
 * **Nhiệm vụ cụ thể:**
-  - [ ] Khai báo 5 thuộc tính `protected`: `id` (string), `name` (string), `price` (double), `stockQuantity` (int), `category` (string).
-  - [ ] Viết hàm tạo mặc định `Product()` và hàm tạo có tham số `Product(id, name, price, stock, category)`.
-  - [ ] Viết hàm tạo sao chép `Product(const Product& other)`.
-  - [ ] **Bắt buộc:** Khai báo hàm hủy ảo `virtual ~Product() = default;`.
-  - [ ] Viết các hàm Getter: `getId()`, `getName()`, `getPrice()`, `getStock()`, `getCategory()`.
-  - [ ] Viết các hàm Setter có validate: `setPrice(double p)` (kiểm tra $p \ge 0$), `setStock(int q)` (kiểm tra $q \ge 0$).
-  - [ ] Khai báo 4 hàm thuần ảo:
+  - [x] Khai báo 5 thuộc tính `protected`: `id` (string), `name` (string), `price` (double), `stockQuantity` (int), `category` (string).
+  - [x] Viết hàm tạo mặc định `Product()` và hàm tạo có tham số `Product(id, name, price, stock, category)`.
+  - [x] Viết hàm tạo sao chép `Product(const Product& other)`.
+  - [x] **Bắt buộc:** Khai báo hàm hủy ảo `virtual ~Product() = default;`.
+  - [x] Viết các hàm Getter: `getId()`, `getName()`, `getPrice()`, `getStock()`, `getCategory()`.
+  - [x] Viết các hàm Setter có validate: `setPrice(double p)` (kiểm tra $p \ge 0$), `setStock(int q)` (kiểm tra $q \ge 0$).
+  - [x] Khai báo 4 hàm thuần ảo:
     * `virtual void displayInfo() const = 0;`
     * `virtual double calculateFinalPrice() const = 0;`
     * `virtual std::string getType() const = 0;`
     * `virtual Product* clone() const = 0;`
-  - [ ] Nạp chồng toán tử: `operator==` (so sánh theo ID), `operator<` (so sánh theo giá), `friend operator<<`, `friend operator>>`.
+  - [x] Nạp chồng toán tử: `operator==` (so sánh theo ID), `operator<` (so sánh theo giá), `friend operator<<`, `friend operator>>`.
 
 ---
 

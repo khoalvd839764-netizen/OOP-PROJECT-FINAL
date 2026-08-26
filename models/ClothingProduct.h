@@ -6,20 +6,20 @@
 
 class ClothingProduct : public Product {
 private:
-    std::string size;
-    std::string material;
+    string size;
+    string material;
 
 public:
     ClothingProduct();
-    ClothingProduct(const std::string& id, const std::string& name, double price,
-                    int stockQuantity, const std::string& size, const std::string& material);
+    ClothingProduct(const string& id, const string& name, double price,
+                    int stockQuantity, const string& size, const string& material);
 
-    std::string getSize() const;
-    std::string getMaterial() const;
+    string getSize() const;
+    string getMaterial() const;
 
     void displayInfo() const override;
     double calculateFinalPrice() const override;
-    std::string getType() const override;
+    string getType() const override;
     Product* clone() const override;
 };
 

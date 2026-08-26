@@ -1,51 +1,26 @@
-#include "ClothingProduct.h"
-#include <iostream>
+#ifndef CLOTHING_PRODUCT_H
+#define CLOTHING_PRODUCT_H
 
-using namespace std;
+#include "Product.h"
+#include <string>
 
-ClothingProduct::ClothingProduct(
-    string id,
-    string name,
-    double price,
-    int stockQuantity,
-    string size,
-    string material
-)
-    : Product(id, name, "Clothing", price, stockQuantity),
-      size(size),
-      material(material)
-{
-}
+class ClothingProduct : public Product {
+private:
+    std::string size;
+    std::string material;
 
-string ClothingProduct::getSize() const {
-    return size;
-}
+public:
+    ClothingProduct();
+    ClothingProduct(const std::string& id, const std::string& name, double price,
+                    int stockQuantity, const std::string& size, const std::string& material);
 
-string ClothingProduct::getMaterial() const {
-    return material;
-}
+    std::string getSize() const;
+    std::string getMaterial() const;
 
-void ClothingProduct::displayInfo() const {
-    cout << "[CLOTHING] "
-         << getName()
-         << " | Giá VND: " << getPrice()
-         << " | Size: " << size
-         << " | Chất liệu: " << material
-         << endl;
-}
+    void displayInfo() const override;
+    double calculateFinalPrice() const override;
+    std::string getType() const override;
+    Product* clone() const override;
+};
 
-double ClothingProduct::calculateFinalPrice() const {
-    if (material == "Silk" || material == "Leather") {
-        return getPrice() * 1.10;
-    }
-
-    return getPrice();
-}
-
-string ClothingProduct::getType() const {
-    return "CLOTHING";
-}
-
-Product* ClothingProduct::clone() const {
-    return new ClothingProduct(*this);
-}
+#endif

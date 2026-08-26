@@ -3,13 +3,16 @@
 
 using namespace std;
 
+ClothingProduct::ClothingProduct()
+    : Product("", "", "Clothing", 0, 0), size(""), material("") {}
+
 ClothingProduct::ClothingProduct(
-    string id,
-    string name,
+    const string& id,
+    const string& name,
     double price,
     int stockQuantity,
-    string size,
-    string material
+    const string& size,
+    const string& material
 )
     : Product(id, name, "Clothing", price, stockQuantity),
       size(size),
@@ -28,7 +31,7 @@ string ClothingProduct::getMaterial() const {
 void ClothingProduct::displayInfo() const {
     cout << "[CLOTHING] "
          << getName()
-         << " | Giá VND: " << getPrice()
+         << " | " << getPrice() << " VND"
          << " | Size: " << size
          << " | Chất liệu: " << material
          << endl;
@@ -38,7 +41,6 @@ double ClothingProduct::calculateFinalPrice() const {
     if (material == "Silk" || material == "Leather") {
         return getPrice() * 1.10;
     }
-
     return getPrice();
 }
 

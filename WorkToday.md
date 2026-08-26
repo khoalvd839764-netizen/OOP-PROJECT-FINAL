@@ -9,7 +9,7 @@
 | Task | Module / File phụ trách | Người thực hiện (Assignee) | Trạng thái |
 | :---: | :--- | :--- | :---: |
 | **Task 1** | **Lớp cha `Product`** (`Product.h`, `Product.cpp`) | `👤 [ ĐĂNG KHOA ]` | ✅ Đã hoàn thành |
-| **Task 2** | **Lớp con `FoodProduct`** (`FoodProduct.h`, `FoodProduct.cpp`) | `👤 [ TUẤN PHONG ]` | ⏳ Chưa xong |
+| **Task 2** | **Lớp con `FoodProduct`** (`FoodProduct.h`, `FoodProduct.cpp`) | `👤 [ TUẤN PHONG ]` | ✅ Đã hoàn thành |
 | **Task 3** | **Lớp con `ElectronicsProduct`** (`ElectronicsProduct.h`, `ElectronicsProduct.cpp`) | `👤 [ TRƯỜNG ]` | ⏳ Chưa xong |
 | **Task 4** | **Lớp con `ClothingProduct`** (`ClothingProduct.h`, `ClothingProduct.cpp`) | `👤 [ KIM HUỆ ]` | ⏳ Chưa xong |
 | **Task 5** | **Viết code Test nghiệm thu** (`main.cpp`, kiểm tra build) | `👤 [ ĐĂNG KHOA ]` | ⏳ Chưa xong |

@@ -4,15 +4,15 @@
 
 ---
 
-## 👥 BẢNG PHÂN CÔNG NHIỆM VỤ (Điền tên thành viên vào đây)
+## 👥 BẢNG PHÂN CÔNG NHIỆM VỤ
 
 | Task | Module / File phụ trách | Người thực hiện (Assignee) | Trạng thái |
 | :---: | :--- | :--- | :---: |
-| **Task 1** | **Lớp cha `Product`** (`Product.h`, `Product.cpp`) | `👤 [ ĐĂNG KHOA ]` | ✅ Đã hoàn thành |
-| **Task 2** | **Lớp con `FoodProduct`** (`FoodProduct.h`, `FoodProduct.cpp`) | `👤 [ TUẤN PHONG ]` | ✅ Đã hoàn thành |
-| **Task 3** | **Lớp con `ElectronicsProduct`** (`ElectronicsProduct.h`, `ElectronicsProduct.cpp`) | `👤 [ TRƯỜNG ]` | ⏳ Chưa xong |
-| **Task 4** | **Lớp con `ClothingProduct`** (`ClothingProduct.h`, `ClothingProduct.cpp`) | `👤 [ KIM HUỆ ]` | ⏳ Chưa xong |
-| **Task 5** | **Viết code Test nghiệm thu** (`main.cpp`, kiểm tra build) | `👤 [ ĐĂNG KHOA ]` | ⏳ Chưa xong |
+| **Task 1** | **Lớp cha `Product`** (`Product.h`, `Product.cpp`) | `👤 ĐĂNG KHOA` | ✅ Đã hoàn thành |
+| **Task 2** | **Lớp con `FoodProduct`** (`FoodProduct.h`, `FoodProduct.cpp`) | `👤 TUẤN PHONG` | ✅ Đã hoàn thành |
+| **Task 3** | **Lớp con `ElectronicsProduct`** (`ElectronicsProduct.h`, `ElectronicsProduct.cpp`) | `👤 TRƯỜNG` | ✅ Đã hoàn thành |
+| **Task 4** | **Lớp con `ClothingProduct`** (`ClothingProduct.h`, `ClothingProduct.cpp`) | `👤 KIM HUỆ` | ✅ Đã hoàn thành |
+| **Task 5** | **Viết code Test nghiệm thu** (`main.cpp`, kiểm tra build) | `👤 ĐĂNG KHOA (Leader)` | ✅ Đã hoàn thành |
 
 ---
 
@@ -43,11 +43,11 @@
 * **👤 Người thực hiện:** `TUẤN PHONG`
 * **📁 File cần code:** `models/FoodProduct.h` và `models/FoodProduct.cpp`
 * **Nhiệm vụ cụ thể:**
-  - [ ] Kế thừa lớp cha: `class FoodProduct : public Product`.
-  - [ ] Khai báo 2 thuộc tính riêng (`private`): `expiryDate` (string, hạn sử dụng), `isOrganic` (bool, hữu cơ).
-  - [ ] Viết hàm tạo: Gọi `Product(id, name, price, stock, "Food")` trong danh sách khởi tạo + gán `expiryDate`, `isOrganic`.
-  - [ ] Viết Getter: `getExpiryDate()`, `getIsOrganic()`.
-  - [ ] **Override 4 hàm thuần ảo:**
+  - [x] Kế thừa lớp cha: `class FoodProduct : public Product`.
+  - [x] Khai báo 2 thuộc tính riêng (`private`): `expiryDate` (string, hạn sử dụng), `isOrganic` (bool, hữu cơ).
+  - [x] Viết hàm tạo: Gọi `Product(id, name, price, stock, "Food")` trong danh sách khởi tạo + gán `expiryDate`, `isOrganic`.
+  - [x] Viết Getter: `getExpiryDate()`, `getIsOrganic()`.
+  - [x] **Override 4 hàm thuần ảo:**
     * `void displayInfo() const override`: In ra console dạng `[FOOD] Tên | Giá VND | HSD: yyyy-mm-dd | Hữu cơ: Có/Không`.
     * `double calculateFinalPrice() const override`: Nếu `isOrganic == true` $\rightarrow$ trả về `price * 1.05`, ngược lại trả về `price`.
     * `std::string getType() const override`: Trả về chuỗi `"FOOD"`.
@@ -59,11 +59,11 @@
 * **👤 Người thực hiện:** `TRƯỜNG`
 * **📁 File cần code:** `models/ElectronicsProduct.h` và `models/ElectronicsProduct.cpp`
 * **Nhiệm vụ cụ thể:**
-  - [ ] Kế thừa lớp cha: `class ElectronicsProduct : public Product`.
-  - [ ] Khai báo 2 thuộc tính riêng (`private`): `warrantyMonths` (int, số tháng bảo hành), `brand` (string, thương hiệu).
-  - [ ] Viết hàm tạo: Gọi `Product(id, name, price, stock, "Electronics")` trong danh sách khởi tạo + gán `warrantyMonths`, `brand`.
-  - [ ] Viết Getter: `getWarrantyMonths()`, `getBrand()`.
-  - [ ] **Override 4 hàm thuần ảo:**
+  - [x] Kế thừa lớp cha: `class ElectronicsProduct : public Product`.
+  - [x] Khai báo 2 thuộc tính riêng (`private`): `warrantyMonths` (int, số tháng bảo hành), `brand` (string, thương hiệu).
+  - [x] Viết hàm tạo: Gọi `Product(id, name, price, stock, "Electronics")` trong danh sách khởi tạo + gán `warrantyMonths`, `brand`.
+  - [x] Viết Getter: `getWarrantyMonths()`, `getBrand()`.
+  - [x] **Override 4 hàm thuần ảo:**
     * `void displayInfo() const override`: In ra console dạng `[ELECTRONICS] Tên | Giá VND | Hãng: Brand | Bảo hành: X tháng`.
     * `double calculateFinalPrice() const override`: Nếu `warrantyMonths > 12` $\rightarrow$ trả về `price * 1.05` (+5% phí bảo hành), ngược lại trả về `price`.
     * `std::string getType() const override`: Trả về chuỗi `"ELECTRONICS"`.
@@ -75,11 +75,11 @@
 * **👤 Người thực hiện:** `KIM HUỆ`
 * **📁 File cần code:** `models/ClothingProduct.h` và `models/ClothingProduct.cpp`
 * **Nhiệm vụ cụ thể:**
-  - [ ] Kế thừa lớp cha: `class ClothingProduct : public Product`.
-  - [ ] Khai báo 2 thuộc tính riêng (`private`): `size` (string, size áo/quần), `material` (string, chất liệu).
-  - [ ] Viết hàm tạo: Gọi `Product(id, name, price, stock, "Clothing")` trong danh sách khởi tạo + gán `size`, `material`.
-  - [ ] Viết Getter: `getSize()`, `getMaterial()`.
-  - [ ] **Override 4 hàm thuần ảo:**
+  - [x] Kế thừa lớp cha: `class ClothingProduct : public Product`.
+  - [x] Khai báo 2 thuộc tính riêng (`private`): `size` (string, size áo/quần), `material` (string, chất liệu).
+  - [x] Viết hàm tạo: Gọi `Product(id, name, price, stock, "Clothing")` trong danh sách khởi tạo + gán `size`, `material`.
+  - [x] Viết Getter: `getSize()`, `getMaterial()`.
+  - [x] **Override 4 hàm thuần ảo:**
     * `void displayInfo() const override`: In ra console dạng `[CLOTHING] Tên | Giá VND | Size: L | Chất liệu: Cotton`.
     * `double calculateFinalPrice() const override`: Nếu `material` là `"Silk"` hoặc `"Leather"` $\rightarrow$ trả về `price * 1.10` (+10% hàng cao cấp), ngược lại trả về `price`.
     * `std::string getType() const override`: Trả về chuỗi `"CLOTHING"`.
@@ -91,7 +91,7 @@
 * **👤 Người thực hiện:** `ĐĂNG KHOA (Leader)`
 * **📁 File cần code:** `main.cpp`
 * **Nhiệm vụ cụ thể:**
-  - [ ] Ghép 4 task trên lại và viết code test trong `main.cpp`:
+  - [x] Ghép 4 task trên lại và viết code test trong `main.cpp`:
 
 ```cpp
 #include "models/Product.h"

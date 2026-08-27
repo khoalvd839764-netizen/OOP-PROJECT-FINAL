@@ -3,9 +3,9 @@
 
 #include "../managers/DataManager.h"
 #include "../managers/FileManager.h"
-#include "../models/ShoppingCart.h"
-#include "../models/Customer.h"
-#include "../models/Order.h"
+#include "../models/cart/ShoppingCart.h"
+#include "../models/person/Customer.h"
+#include "../models/order/Order.h"
 #include <vector>
 #include <memory>
 

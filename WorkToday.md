@@ -29,12 +29,12 @@
 
 ## 👥 BẢNG PHÂN CÔNG NHIỆM VỤ
 
-| Task | File phụ trách | Người thực hiện | Độ ưu tiên | Trạng thái |
+| Task | File phụ trách | Người thực hiện (Assignee) | Độ ưu tiên | Trạng thái |
 | :---: | :--- | :--- | :---: | :---: |
-| **Task 1** | `managers/DataManager.h` | `👤 [ Leader / Dev 1 ]` | 🔴 **Ưu tiên 1 (Làm trước)** | ⏳ Chưa xong |
-| **Task 2** | `managers/FileManager.h / .cpp` | `👤 [ Leader / Dev 2 ]` | 🟠 **Ưu tiên 2 (Làm kế tiếp)** | ⏳ Chưa xong |
-| **Task 3** | `app/OrderingApp.h / .cpp` | `👤 [ Leader ]` | 🟡 **Ưu tiên 3 (Làm sau 1 & 2)** | ⏳ Chưa xong |
-| **Task 4** | `main.cpp` & Test Nghiệm Thu | `👤 [ Cả nhóm ]` | 🟢 **Ưu tiên 4 (Về đích)** | ⏳ Chưa xong |
+| **Task 1** | `managers/DataManager.h` | `👤 KIM HUỆ` | 🔴 **Ưu tiên 1 (Làm trước)** | ⏳ Chưa xong |
+| **Task 2** | `managers/FileManager.h / .cpp` | `👤 TUẤN PHONG` | 🟠 **Ưu tiên 2 (Làm kế tiếp)** | ⏳ Chưa xong |
+| **Task 3** | `app/OrderingApp.h / .cpp` | `👤 TRƯỜNG` | 🟡 **Ưu tiên 3 (Làm sau 1 & 2)** | ⏳ Chưa xong |
+| **Task 4** | `main.cpp` & Test Nghiệm Thu | `👤 ĐĂNG KHOA (Leader)` | 🟢 **Ưu tiên 4 (Về đích)** | ⏳ Chưa xong |
 
 ---
 
@@ -42,7 +42,9 @@
 
 ---
 
-### 🔹 BƯỚC 1: Hoàn thiện `managers/DataManager.h` (Làm đầu tiên)
+### 🔹 TASK 1: Hoàn thiện `managers/DataManager.h` (Làm đầu tiên)
+* **👤 Người thực hiện:** `KIM HUỆ`
+* **📁 File cần code:** `managers/DataManager.h`
 * **Đặc điểm:** Là **Template Class** (Header-only, chỉ có file `.h`, không cần `.cpp`).
 * **Nhiệm vụ cụ thể:**
   - [ ] Khai báo template: `template <typename T> class DataManager { ... };`
@@ -59,7 +61,9 @@
 
 ---
 
-### 🔹 BƯỚC 2: Hoàn thiện `managers/FileManager.h` & `FileManager.cpp` (Làm thứ hai)
+### 🔹 TASK 2: Hoàn thiện `managers/FileManager.h` & `FileManager.cpp` (Làm thứ hai)
+* **👤 Người thực hiện:** `TUẤN PHONG`
+* **📁 File cần code:** `managers/FileManager.h` và `managers/FileManager.cpp`
 * **Đặc điểm:** Chỉ chứa các hàm `static`, không cần tạo đối tượng.
 * **Nhiệm vụ cụ thể:**
   - [ ] **Hàm 1:** `static std::vector<std::shared_ptr<Product>> loadProducts(const std::string& filename);`
@@ -76,7 +80,9 @@
 
 ---
 
-### 🔹 BƯỚC 3: Hoàn thiện `app/OrderingApp.h` & `OrderingApp.cpp` (Làm thứ ba)
+### 🔹 TASK 3: Hoàn thiện `app/OrderingApp.h` & `OrderingApp.cpp` (Làm thứ ba)
+* **👤 Người thực hiện:** `TRƯỜNG`
+* **📁 File cần code:** `app/OrderingApp.h` và `app/OrderingApp.cpp`
 * **Đặc điểm:** "Bộ não" điều phối tương tác Console giữa người dùng và toàn bộ hệ thống.
 * **Thuộc tính trong `OrderingApp`:**
   ```cpp
@@ -116,7 +122,9 @@
 
 ---
 
-### 🔹 BƯỚC 4: `main.cpp` & Test Toàn Bộ Ứng Dụng (Về đích)
+### 🔹 TASK 4: `main.cpp` & Test Toàn Bộ Ứng Dụng (Về đích)
+* **👤 Người thực hiện:** `ĐĂNG KHOA (Leader)`
+* **📁 File cần code:** `main.cpp`
 * **Trong `main.cpp`:**
   ```cpp
   #include "app/OrderingApp.h"

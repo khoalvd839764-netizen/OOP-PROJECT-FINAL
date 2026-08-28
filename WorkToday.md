@@ -31,7 +31,7 @@
 
 | Task | File phụ trách | Người thực hiện (Assignee) | Độ ưu tiên | Trạng thái |
 | :---: | :--- | :--- | :---: | :---: |
-| **Task 1** | `managers/DataManager.h` | `👤 KIM HUỆ` | 🔴 **Ưu tiên 1 (Làm trước)** | ⏳ Chưa xong |
+| **Task 1** | `managers/DataManager.h` | `👤 KIM HUỆ` | 🔴 **Ưu tiên 1 (Làm trước)** | ✅ **Đã hoàn thành** |
 | **Task 2** | `managers/FileManager.h / .cpp` | `👤 TUẤN PHONG` | 🟠 **Ưu tiên 2 (Làm kế tiếp)** | ⏳ Chưa xong |
 | **Task 3** | `app/OrderingApp.h / .cpp` | `👤 TRƯỜNG` | 🟡 **Ưu tiên 3 (Làm sau 1 & 2)** | ⏳ Chưa xong |
 | **Task 4** | `main.cpp` & Test Nghiệm Thu | `👤 ĐĂNG KHOA (Leader)` | 🟢 **Ưu tiên 4 (Về đích)** | ⏳ Chưa xong |
@@ -47,14 +47,14 @@
 * **📁 File cần code:** `managers/DataManager.h`
 * **Đặc điểm:** Là **Template Class** (Header-only, chỉ có file `.h`, không cần `.cpp`).
 * **Nhiệm vụ cụ thể:**
-  - [ ] Khai báo template: `template <typename T> class DataManager { ... };`
-  - [ ] Thuộc tính `private`: `std::vector<T> items;`
-  - [ ] Viết hàm `void add(const T& item)`: `items.push_back(item);`
-  - [ ] Viết hàm `bool remove(int index)`: Kiểm tra `index` hợp lệ rồi `erase`.
-  - [ ] Viết hàm `const std::vector<T>& getAll() const`: Trả về `items`.
-  - [ ] Viết hàm `size_t count() const`: Trả về `items.size()`.
-  - [ ] Viết hàm `T& operator[](int index)` và `const T& operator[](int index) const`.
-  - [ ] **Template lồng Lambda:**
+  - [x] Khai báo template: `template <typename T> class DataManager { ... };`
+  - [x] Thuộc tính `private`: `std::vector<T> items;`
+  - [x] Viết hàm `void add(const T& item)`: `items.push_back(item);`
+  - [x] Viết hàm `bool remove(int index)`: Kiểm tra `index` hợp lệ rồi `erase`.
+  - [x] Viết hàm `const std::vector<T>& getAll() const`: Trả về `items`.
+  - [x] Viết hàm `size_t count() const`: Trả về `items.size()`.
+  - [x] Viết hàm `T& operator[](int index)` và `const T& operator[](int index) const`.
+  - [x] **Template lồng Lambda:**
     * `template <typename Func> std::vector<T> filter(Func condition)`: Duyệt `items`, nếu `condition(item) == true` thì gom vào kết quả trả về (dùng tìm kiếm SP).
     * `template <typename Func> void sort(Func comparator)`: Gọi `std::sort(items.begin(), items.end(), comparator)` (dùng sắp xếp SP).
     * `template <typename Func> T* find(Func condition)`: Tìm phần tử đầu tiên thỏa mãn, trả về con trỏ `&item` hoặc `nullptr` (dùng tìm SP theo ID).

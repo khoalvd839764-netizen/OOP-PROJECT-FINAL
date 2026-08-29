@@ -3,7 +3,7 @@
 
 ElectronicsProduct::ElectronicsProduct(string id, string name, double price, int stock, 
                                        int warrantyMonths, string brand)
-    : Product(id, name, price, stock, "Electronics"), 
+    : Product(id, name, "Electronics", price, stock), 
       warrantyMonths(warrantyMonths), brand(brand) {}
 
 int ElectronicsProduct::getWarrantyMonths() const {
@@ -32,6 +32,6 @@ string ElectronicsProduct::getType() const {
     return "ELECTRONICS";
 }
 
-Product* ElectroncafuicsProduct::clone() const {
+Product* ElectronicsProduct::clone() const {
     return new ElectronicsProduct(*this);
 }

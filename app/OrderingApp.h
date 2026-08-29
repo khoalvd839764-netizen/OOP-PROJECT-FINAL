@@ -7,18 +7,20 @@
 #include <string>
 
 #include "../models/Product.h"
-#include "../models/Customer.h"
-#include "../models/ShoppingCart.h"
-#include "../models/Order.h"
-#include "../services/DataManager.h"
-#include "../services/FileManager.h"
+#include "../models/person/Customer.h"
+#include "../models/cart/ShoppingCart.h"
+#include "../models/order/order.h"
+#include "../managers/DataManager.h"
+#include "../managers/FileManager.h"
+
+using namespace std;
 
 class OrderingApp {
 private:
-    DataManager<std::shared_ptr<Product>> productManager;
+    DataManager<shared_ptr<Product>> productManager;
     ShoppingCart cart;
     Customer currentCustomer;
-    std::vector<Order> orders;
+    vector<Order> orders;
 
     void showProducts();
     void searchProducts();

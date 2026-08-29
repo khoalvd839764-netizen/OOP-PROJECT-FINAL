@@ -4,15 +4,15 @@ CXXFLAGS = -std=c++17 -Wall -Wextra
 TARGET = ordering_app
 
 SRCS = main.cpp \
-       models/Product.cpp \
-       models/FoodProduct.cpp \
-       models/ElectronicsProduct.cpp \
-       models/ClothingProduct.cpp \
-       models/Person.cpp \
-       models/Customer.cpp \
-       models/CartItem.cpp \
-       models/ShoppingCart.cpp \
-       models/Order.cpp \
+       models/products/Product.cpp \
+       models/products/FoodProduct.cpp \
+       models/products/ElectronicsProduct.cpp \
+       models/products/ClothingProduct.cpp \
+       models/person/Person.cpp \
+       models/person/Customer.cpp \
+       models/cart/CartItem.cpp \
+       models/cart/ShoppingCart.cpp \
+       models/order/Order.cpp \
        managers/FileManager.cpp \
        app/OrderingApp.cpp
 

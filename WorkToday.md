@@ -1,138 +1,148 @@
-# 📋 WORK TODAY: Phân Công Triển Khai Nhóm Sản Phẩm (Product Hierarchy)
+# 📋 WORK TODAY: Hướng Dẫn Hoàn Thiện Tầng Managers & App Controller
 
-> **Mục tiêu hôm nay:** Hoàn thiện 100% tầng dữ liệu Sản phẩm gồm 4 class (`Product`, `FoodProduct`, `ElectronicsProduct`, `ClothingProduct`) và chạy test nghiệm thu tính Đa hình.
-
----
-
-## 👥 BẢNG PHÂN CÔNG NHIỆM VỤ (Điền tên thành viên vào đây)
-
-| Task | Module / File phụ trách | Người thực hiện (Assignee) | Trạng thái |
-| :---: | :--- | :--- | :---: |
-| **Task 1** | **Lớp cha `Product`** (`Product.h`, `Product.cpp`) | `👤 [ ĐĂNG KHOA ]` | ✅ Đã hoàn thành |
-| **Task 2** | **Lớp con `FoodProduct`** (`FoodProduct.h`, `FoodProduct.cpp`) | `👤 [ TUẤN PHONG ]` | ⏳ Chưa xong |
-| **Task 3** | **Lớp con `ElectronicsProduct`** (`ElectronicsProduct.h`, `ElectronicsProduct.cpp`) | `👤 [ TRƯỜNG ]` | ⏳ Chưa xong |
-| **Task 4** | **Lớp con `ClothingProduct`** (`ClothingProduct.h`, `ClothingProduct.cpp`) | `👤 [ KIM HUỆ ]` | ⏳ Chưa xong |
-| **Task 5** | **Viết code Test nghiệm thu** (`main.cpp`, kiểm tra build) | `👤 [ ĐĂNG KHOA ]` | ⏳ Chưa xong |
+> **Mục tiêu chặng cuối:** Hoàn thiện 100% tầng Quản lý (`managers/`), Giao diện điều khiển (`app/`) và chạy toàn bộ chương trình `main.cpp` để hoàn thành đồ án!
 
 ---
 
-## 📝 CHI TIẾT TỪNG PHẦN VIỆC
+## 🗺️ THỨ TỰ BẮT BUỘC PHẢI LÀM (Dependency Order)
 
----
-
-### 🔹 TASK 1: Lớp Cha Cơ Sở `Product` (Abstract Base Class)
-* **👤 Người thực hiện:** `ĐĂNG KHOA`
-* **📁 File cần code:** `models/Product.h` và `models/Product.cpp`
-* **Nhiệm vụ cụ thể:**
-  - [x] Khai báo 5 thuộc tính `protected`: `id` (string), `name` (string), `price` (double), `stockQuantity` (int), `category` (string).
-  - [x] Viết hàm tạo mặc định `Product()` và hàm tạo có tham số `Product(id, name, price, stock, category)`.
-  - [x] Viết hàm tạo sao chép `Product(const Product& other)`.
-  - [x] **Bắt buộc:** Khai báo hàm hủy ảo `virtual ~Product() = default;`.
-  - [x] Viết các hàm Getter: `getId()`, `getName()`, `getPrice()`, `getStock()`, `getCategory()`.
-  - [x] Viết các hàm Setter có validate: `setPrice(double p)` (kiểm tra $p \ge 0$), `setStock(int q)` (kiểm tra $q \ge 0$).
-  - [x] Khai báo 4 hàm thuần ảo:
-    * `virtual void displayInfo() const = 0;`
-    * `virtual double calculateFinalPrice() const = 0;`
-    * `virtual std::string getType() const = 0;`
-    * `virtual Product* clone() const = 0;`
-  - [x] Nạp chồng toán tử: `operator==` (so sánh theo ID), `operator<` (so sánh theo giá), `friend operator<<`, `friend operator>>`.
-
----
-
-### 🔹 TASK 2: Lớp Con Thực Phẩm `FoodProduct`
-* **👤 Người thực hiện:** `TUẤN PHONG`
-* **📁 File cần code:** `models/FoodProduct.h` và `models/FoodProduct.cpp`
-* **Nhiệm vụ cụ thể:**
-  - [ ] Kế thừa lớp cha: `class FoodProduct : public Product`.
-  - [ ] Khai báo 2 thuộc tính riêng (`private`): `expiryDate` (string, hạn sử dụng), `isOrganic` (bool, hữu cơ).
-  - [ ] Viết hàm tạo: Gọi `Product(id, name, price, stock, "Food")` trong danh sách khởi tạo + gán `expiryDate`, `isOrganic`.
-  - [ ] Viết Getter: `getExpiryDate()`, `getIsOrganic()`.
-  - [ ] **Override 4 hàm thuần ảo:**
-    * `void displayInfo() const override`: In ra console dạng `[FOOD] Tên | Giá VND | HSD: yyyy-mm-dd | Hữu cơ: Có/Không`.
-    * `double calculateFinalPrice() const override`: Nếu `isOrganic == true` $\rightarrow$ trả về `price * 1.05`, ngược lại trả về `price`.
-    * `std::string getType() const override`: Trả về chuỗi `"FOOD"`.
-    * `Product* clone() const override`: Trả về `new FoodProduct(*this)`.
-
----
-
-### 🔹 TASK 3: Lớp Con Đồ Điện Tử `ElectronicsProduct`
-* **👤 Người thực hiện:** `TRƯỜNG`
-* **📁 File cần code:** `models/ElectronicsProduct.h` và `models/ElectronicsProduct.cpp`
-* **Nhiệm vụ cụ thể:**
-  - [ ] Kế thừa lớp cha: `class ElectronicsProduct : public Product`.
-  - [ ] Khai báo 2 thuộc tính riêng (`private`): `warrantyMonths` (int, số tháng bảo hành), `brand` (string, thương hiệu).
-  - [ ] Viết hàm tạo: Gọi `Product(id, name, price, stock, "Electronics")` trong danh sách khởi tạo + gán `warrantyMonths`, `brand`.
-  - [ ] Viết Getter: `getWarrantyMonths()`, `getBrand()`.
-  - [ ] **Override 4 hàm thuần ảo:**
-    * `void displayInfo() const override`: In ra console dạng `[ELECTRONICS] Tên | Giá VND | Hãng: Brand | Bảo hành: X tháng`.
-    * `double calculateFinalPrice() const override`: Nếu `warrantyMonths > 12` $\rightarrow$ trả về `price * 1.05` (+5% phí bảo hành), ngược lại trả về `price`.
-    * `std::string getType() const override`: Trả về chuỗi `"ELECTRONICS"`.
-    * `Product* clone() const override`: Trả về `new ElectronicsProduct(*this)`.
-
----
-
-### 🔹 TASK 4: Lớp Con Thời Trang `ClothingProduct`
-* **👤 Người thực hiện:** `KIM HUỆ`
-* **📁 File cần code:** `models/ClothingProduct.h` và `models/ClothingProduct.cpp`
-* **Nhiệm vụ cụ thể:**
-  - [ ] Kế thừa lớp cha: `class ClothingProduct : public Product`.
-  - [ ] Khai báo 2 thuộc tính riêng (`private`): `size` (string, size áo/quần), `material` (string, chất liệu).
-  - [ ] Viết hàm tạo: Gọi `Product(id, name, price, stock, "Clothing")` trong danh sách khởi tạo + gán `size`, `material`.
-  - [ ] Viết Getter: `getSize()`, `getMaterial()`.
-  - [ ] **Override 4 hàm thuần ảo:**
-    * `void displayInfo() const override`: In ra console dạng `[CLOTHING] Tên | Giá VND | Size: L | Chất liệu: Cotton`.
-    * `double calculateFinalPrice() const override`: Nếu `material` là `"Silk"` hoặc `"Leather"` $\rightarrow$ trả về `price * 1.10` (+10% hàng cao cấp), ngược lại trả về `price`.
-    * `std::string getType() const override`: Trả về chuỗi `"CLOTHING"`.
-    * `Product* clone() const override`: Trả về `new ClothingProduct(*this)`.
-
----
-
-### 🔹 TASK 5: Test & Nghiệm Thu Nhóm Sản Phẩm (Dành cho Leader)
-* **👤 Người thực hiện:** `ĐĂNG KHOA (Leader)`
-* **📁 File cần code:** `main.cpp`
-* **Nhiệm vụ cụ thể:**
-  - [ ] Ghép 4 task trên lại và viết code test trong `main.cpp`:
-
-```cpp
-#include "models/Product.h"
-#include "models/FoodProduct.h"
-#include "models/ElectronicsProduct.h"
-#include "models/ClothingProduct.h"
-#include <iostream>
-#include <vector>
-#include <memory>
-
-int main() {
-    std::cout << "====================================================\n";
-    std::cout << "   TEST NGHIEM THU NHOM SAN PHAM (POLYMORPHISM)     \n";
-    std::cout << "====================================================\n\n";
-
-    // 1. Tao danh sach da hinh chua 3 loai san pham
-    std::vector<std::shared_ptr<Product>> testList;
-
-    testList.push_back(std::make_shared<FoodProduct>("F01", "Sua tuoi TH", 32000, 100, "2026-12-31", true));
-    testList.push_back(std::make_shared<ElectronicsProduct>("E01", "Tai nghe Sony", 350000, 50, 24, "Sony"));
-    testList.push_back(std::make_shared<ClothingProduct>("C01", "Vay lua Ha Dong", 500000, 20, "M", "Silk"));
-
-    // 2. Duyet danh sach va goi cac phuong thuc da hinh
-    for (size_t i = 0; i < testList.size(); ++i) {
-        std::cout << "[" << (i + 1) << "] ";
-        testList[i]->displayInfo(); // Test da hinh 1: In thong tin
-        std::cout << "    -> Gia goc: " << testList[i]->getPrice() 
-                  << " VND | Gia sau tinh phi/thue: " << testList[i]->calculateFinalPrice() << " VND\n";
-        std::cout << "    -> Nhan dien kieu (getType): " << testList[i]->getType() << "\n\n";
-    }
-
-    std::cout << "====================================================\n";
-    std::cout << "  [SUCCESS] 4 CLASS SAN PHAM HOAT DONG CHINH XAC!   \n";
-    std::cout << "====================================================\n";
-
-    return 0;
-}
+```
+[BƯỚC 1: XONG ĐẦU TIÊN] ──► managers/DataManager.h      (Template class quản lý kho)
+         │
+         ▼
+[BƯỚC 2: XONG THỨ HAI]  ──► managers/FileManager.h/.cpp (Đọc products.txt & Ghi file)
+         │
+         ▼
+[BƯỚC 3: XONG THỨ BA]   ──► app/OrderingApp.h/.cpp      (Menu Console điều khiển app)
+         │
+         ▼
+[BƯỚC 4: VỀ ĐÍCH 🏆]     ──► main.cpp & Makefile        (Chạy toàn bộ ứng dụng từ A-Z)
 ```
 
-* **Lệnh chạy kiểm tra:**
-  ```bash
-  g++ -std=c++17 main.cpp models/Product.cpp models/FoodProduct.cpp models/ElectronicsProduct.cpp models/ClothingProduct.cpp -o test_products
-  ./test_products
+> **Lý do thứ tự này:**
+> 1. `DataManager<T>` hoàn toàn độc lập, là "cái kho" để chứa dữ liệu.
+> 2. `FileManager` là "thợ đọc/ghi file", đọc file xong sẽ nạp dữ liệu vào `DataManager`.
+> 3. `OrderingApp` cần cả 2 class trên để hoạt động (lấy kho từ `DataManager` và gọi `FileManager` lưu đơn).
+> 4. `main.cpp` chỉ việc bật `OrderingApp` lên chạy.
+
+---
+
+## 👥 BẢNG PHÂN CÔNG NHIỆM VỤ
+
+| Task | File phụ trách | Người thực hiện (Assignee) | Độ ưu tiên | Trạng thái |
+| :---: | :--- | :--- | :---: | :---: |
+| **Task 1** | `managers/DataManager.h` | `👤 KIM HUỆ` | 🔴 **Ưu tiên 1 (Làm trước)** | ✅ **Đã hoàn thành** |
+| **Task 2** | `managers/FileManager.h / .cpp` | `👤 TUẤN PHONG` | 🟠 **Ưu tiên 2 (Làm kế tiếp)** | ✅ **Đã hoàn thành** |
+| **Task 3** | `app/OrderingApp.h / .cpp` | `👤 TRƯỜNG` | 🟡 **Ưu tiên 3 (Làm sau 1 & 2)** | ⏳ Chưa xong |
+| **Task 4** | `main.cpp` & Test Nghiệm Thu | `👤 ĐĂNG KHOA (Leader)` | 🟢 **Ưu tiên 4 (Về đích)** | ⏳ Chưa xong |
+
+---
+
+## 📝 CHI TIẾT HƯỚNG DẪN TỪNG BƯỚC
+
+---
+
+### 🔹 TASK 1: Hoàn thiện `managers/DataManager.h` (Làm đầu tiên)
+* **👤 Người thực hiện:** `KIM HUỆ`
+* **📁 File cần code:** `managers/DataManager.h`
+* **Đặc điểm:** Là **Template Class** (Header-only, chỉ có file `.h`, không cần `.cpp`).
+* **Nhiệm vụ cụ thể:**
+  - [x] Khai báo template: `template <typename T> class DataManager { ... };`
+  - [x] Thuộc tính `private`: `std::vector<T> items;`
+  - [x] Viết hàm `void add(const T& item)`: `items.push_back(item);`
+  - [x] Viết hàm `bool remove(int index)`: Kiểm tra `index` hợp lệ rồi `erase`.
+  - [x] Viết hàm `const std::vector<T>& getAll() const`: Trả về `items`.
+  - [x] Viết hàm `size_t count() const`: Trả về `items.size()`.
+  - [x] Viết hàm `T& operator[](int index)` và `const T& operator[](int index) const`.
+  - [x] **Template lồng Lambda:**
+    * `template <typename Func> std::vector<T> filter(Func condition)`: Duyệt `items`, nếu `condition(item) == true` thì gom vào kết quả trả về (dùng tìm kiếm SP).
+    * `template <typename Func> void sort(Func comparator)`: Gọi `std::sort(items.begin(), items.end(), comparator)` (dùng sắp xếp SP).
+    * `template <typename Func> T* find(Func condition)`: Tìm phần tử đầu tiên thỏa mãn, trả về con trỏ `&item` hoặc `nullptr` (dùng tìm SP theo ID).
+
+---
+
+### 🔹 TASK 2: Hoàn thiện `managers/FileManager.h` & `FileManager.cpp` (Làm thứ hai)
+* **👤 Người thực hiện:** `TUẤN PHONG`
+* **📁 File cần code:** `managers/FileManager.h` và `managers/FileManager.cpp`
+* **Đặc điểm:** Chỉ chứa các hàm `static`, không cần tạo đối tượng.
+* **Nhiệm vụ cụ thể:**
+  - [x] **Hàm 1:** `static std::vector<std::shared_ptr<Product>> loadProducts(const std::string& filename);`
+    * Dùng `std::ifstream` mở file `data/products.txt`.
+    * Đọc bỏ qua dòng header đầu tiên.
+    * Dùng `std::stringstream` và `getline(ss, token, '|')` để tách từng cột dữ liệu.
+    * Đọc `type` ("FOOD", "ELECTRONICS", "CLOTHING") $\rightarrow$ ép kiểu `price` (`stod`), `stock` (`stoi`).
+    * Dựa vào `type` gọi `std::make_shared<FoodProduct/ElectronicsProduct/ClothingProduct>(...)` và `push_back` vào vector.
+    * Đóng file và trả về vector sản phẩm.
+  - [x] **Hàm 2:** `static void saveOrder(const Order& order, const std::string& filename);`
+    * Dùng `std::ofstream` mở file ở chế độ ghi tiếp `std::ios::app`.
+    * Ghi đầy đủ thông tin hóa đơn: Mã đơn, ngày đặt, ngày giao, tên KH, SĐT, địa chỉ, danh sách món hàng, phí ship, tổng tiền.
+    * Đóng file.
+
+---
+
+### 🔹 TASK 3: Hoàn thiện `app/OrderingApp.h` & `OrderingApp.cpp` (Làm thứ ba)
+* **👤 Người thực hiện:** `TRƯỜNG`
+* **📁 File cần code:** `app/OrderingApp.h` và `app/OrderingApp.cpp`
+* **Đặc điểm:** "Bộ não" điều phối tương tác Console giữa người dùng và toàn bộ hệ thống.
+* **Thuộc tính trong `OrderingApp`:**
+  ```cpp
+  DataManager<std::shared_ptr<Product>> productManager; // Kho sản phẩm
+  ShoppingCart cart;                                     // Giỏ hàng hiện tại
+  Customer currentCustomer;                             // Khách hàng hiện tại
+  std::vector<Order> orders;                            // Danh sách đơn đã đặt
   ```
+* **Nhiệm vụ cụ thể:**
+  - [ ] **Constructor `OrderingApp()`:** Gọi `FileManager::loadProducts("data/products.txt")` rồi nạp vào `productManager`.
+  - [ ] **Hàm `run()`:** Vòng lặp `while (true)` hiển thị menu 6 chức năng:
+    ```
+    ================================================
+               HE THONG DAT HANG ONLINE             
+    ================================================
+    1. Xem danh sach san pham
+    2. Tim kiem san pham theo ten
+    3. Them san pham vao gio hang
+    4. Xem chi tiet gio hang
+    5. Tien hanh dat hang & Thanh toan
+    6. Xem lich su cac don hang da dat
+    0. Thoat chuong trinh
+    ------------------------------------------------
+    Nhap lua chon cua ban: 
+    ```
+  - [ ] **Chức năng 1 (`showProducts`):** Lấy danh sách từ `productManager.getAll()` và gọi `displayInfo()` (đa hình).
+  - [ ] **Chức năng 2 (`searchProducts`):** Nhập từ khóa $\rightarrow$ gọi `productManager.filter(...)` $\rightarrow$ in kết quả.
+  - [ ] **Chức năng 3 (`addToCart`):** Nhập mã SP $\rightarrow$ tìm trong `productManager` $\rightarrow$ kiểm tra tồn kho $\rightarrow$ gọi `cart.addItem(prod, qty)`.
+  - [ ] **Chức năng 4 (`viewCart`):** Gọi `cout << cart` (in bảng giỏ hàng).
+  - [ ] **Chức năng 5 (`placeOrder`):** 
+    * Kiểm tra giỏ hàng có rỗng không.
+    * Nhập thông tin khách hàng (Họ tên, SĐT, Email, Địa chỉ giao hàng).
+    * Tạo `Customer` $\rightarrow$ Tạo `Order(customer, cart.getItems())`.
+    * In hóa đơn ra màn hình và hỏi xác nhận `(Y/N)`.
+    * Nếu `Y`: Lưu vào `orders`, gọi `FileManager::saveOrder(...)`, dọn sạch giỏ `cart.clear()`.
+  - [ ] **Chức năng 6 (`viewOrderHistory`):** Duyệt `orders` và in các đơn đã đặt.
+
+---
+
+### 🔹 TASK 4: `main.cpp` & Test Toàn Bộ Ứng Dụng (Về đích)
+* **👤 Người thực hiện:** `ĐĂNG KHOA (Leader)`
+* **📁 File cần code:** `main.cpp`
+* **Trong `main.cpp`:**
+  ```cpp
+  #include "app/OrderingApp.h"
+
+  int main() {
+      OrderingApp app;
+      app.run();
+      return 0;
+  }
+  ```
+* **Lệnh Build & Chạy toàn bộ ứng dụng:**
+  ```bash
+  make clean && make
+  ./ordering_app
+  ```
+
+---
+
+## ⚠️ Lưu ý kỹ thuật quan trọng:
+1. **Xử lý trôi lệnh bàn phím:** Khi vừa nhập số (`cin >> choice`) xong chuyển sang nhập chuỗi (`getline`), phải dùng `cin.ignore(10000, '\n');` để xóa bộ đệm.
+2. **Kiểm tra file tồn tại:** Trong `FileManager::loadProducts`, nếu file `data/products.txt` không mở được phải in cảnh báo rõ ràng.

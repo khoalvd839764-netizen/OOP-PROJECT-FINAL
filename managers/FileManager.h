@@ -10,7 +10,9 @@
 #include <memory>
 
 class FileManager {
-
+public:
+    static std::vector<std::shared_ptr<Product>> loadProducts(const std::string& filename);
+    static void saveOrder(const Order& order, const std::string& filename);
 };
 
 #endif

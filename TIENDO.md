@@ -2,7 +2,7 @@
 
 > **Dự án:** Ordering Application (Project 1 - OOP Final Project)  
 > **Cập nhật lần cuối:** 27/08/2026  
-> **Tổng tiến độ hoàn thành:** `[████████████████░░░░] 80%`
+> **Tổng tiến độ hoàn thành:** `[██████████████████░░] 90%`
 
 ---
 
@@ -13,7 +13,7 @@
 | **1** | **Khối Sản Phẩm (Product Hierarchy)** | `models/products/` | 4/4 | ✅ **Đã hoàn thành** | **100%** |
 | **2** | **Khối Người Dùng (Person & Customer)** | `models/person/` | 2/2 | ✅ **Đã hoàn thành** | **100%** |
 | **3** | **Khối Giỏ Hàng & Đơn Hàng (Cart & Order)** | `models/cart/`, `models/order/` | 3/3 | ✅ **Đã hoàn thành** | **100%** |
-| **4** | **Khối Quản Lý Dữ Liệu & File (Managers)** | `managers/` | 1/2 | ⏳ **Đang triển khai** | **50%** |
+| **4** | **Khối Quản Lý Dữ Liệu & File (Managers)** | `managers/` | 2/2 | ✅ **Đã hoàn thành** | **100%** |
 | **5** | **Khối Điều Khiển Ứng Dụng (App Controller)** | `app/`, `main.cpp` | 1/1 | ⏳ **Đang triển khai** | **0%** |
 
 ---
@@ -50,12 +50,12 @@
 
 ---
 
-### ⚙️ Khối 4: Quản Lý Dữ Liệu & Đọc File (`managers/`) — [ĐANG TRIỂN KHAI ⏳]
+### ⚙️ Khối 4: Quản Lý Dữ Liệu & Đọc File (`managers/`) — [ĐÃ XONG 100% ✅]
 
 | File | Class | Người phụ trách | Chức năng cần làm | Trạng thái |
 | :--- | :--- | :--- | :--- | :---: |
 | `DataManager.h` | `DataManager<T>` | **👤 Kim Huệ** | Template class quản lý kho (thêm, xóa, tìm kiếm `filter`, sắp xếp `sort`) | ✅ **Xong** |
-| `FileManager.h` / `.cpp` | `FileManager` | **👤 Tuấn Phong** | Đọc file `products.txt`, nạp đối tượng đa hình, lưu hóa đơn ra file | ⏳ Chưa xong |
+| `FileManager.h` / `.cpp` | `FileManager` | **👤 Tuấn Phong** | Đọc file `products.txt`, nạp đối tượng đa hình, lưu hóa đơn ra file | ✅ **Xong** |
 
 ---
 

@@ -32,7 +32,7 @@
 | Task | File phụ trách | Người thực hiện (Assignee) | Độ ưu tiên | Trạng thái |
 | :---: | :--- | :--- | :---: | :---: |
 | **Task 1** | `managers/DataManager.h` | `👤 KIM HUỆ` | 🔴 **Ưu tiên 1 (Làm trước)** | ✅ **Đã hoàn thành** |
-| **Task 2** | `managers/FileManager.h / .cpp` | `👤 TUẤN PHONG` | 🟠 **Ưu tiên 2 (Làm kế tiếp)** | ⏳ Chưa xong |
+| **Task 2** | `managers/FileManager.h / .cpp` | `👤 TUẤN PHONG` | 🟠 **Ưu tiên 2 (Làm kế tiếp)** | ✅ **Đã hoàn thành** |
 | **Task 3** | `app/OrderingApp.h / .cpp` | `👤 TRƯỜNG` | 🟡 **Ưu tiên 3 (Làm sau 1 & 2)** | ⏳ Chưa xong |
 | **Task 4** | `main.cpp` & Test Nghiệm Thu | `👤 ĐĂNG KHOA (Leader)` | 🟢 **Ưu tiên 4 (Về đích)** | ⏳ Chưa xong |
 
@@ -66,14 +66,14 @@
 * **📁 File cần code:** `managers/FileManager.h` và `managers/FileManager.cpp`
 * **Đặc điểm:** Chỉ chứa các hàm `static`, không cần tạo đối tượng.
 * **Nhiệm vụ cụ thể:**
-  - [ ] **Hàm 1:** `static std::vector<std::shared_ptr<Product>> loadProducts(const std::string& filename);`
+  - [x] **Hàm 1:** `static std::vector<std::shared_ptr<Product>> loadProducts(const std::string& filename);`
     * Dùng `std::ifstream` mở file `data/products.txt`.
     * Đọc bỏ qua dòng header đầu tiên.
     * Dùng `std::stringstream` và `getline(ss, token, '|')` để tách từng cột dữ liệu.
     * Đọc `type` ("FOOD", "ELECTRONICS", "CLOTHING") $\rightarrow$ ép kiểu `price` (`stod`), `stock` (`stoi`).
     * Dựa vào `type` gọi `std::make_shared<FoodProduct/ElectronicsProduct/ClothingProduct>(...)` và `push_back` vào vector.
     * Đóng file và trả về vector sản phẩm.
-  - [ ] **Hàm 2:** `static void saveOrder(const Order& order, const std::string& filename);`
+  - [x] **Hàm 2:** `static void saveOrder(const Order& order, const std::string& filename);`
     * Dùng `std::ofstream` mở file ở chế độ ghi tiếp `std::ios::app`.
     * Ghi đầy đủ thông tin hóa đơn: Mã đơn, ngày đặt, ngày giao, tên KH, SĐT, địa chỉ, danh sách món hàng, phí ship, tổng tiền.
     * Đóng file.

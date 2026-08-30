@@ -9,12 +9,12 @@
 
 ## 👥 1. THÀNH VIÊN NHÓM & PHÂN CÔNG NHIỆM VỤ
 
-| STT | Họ và Tên | Vai trò | Nhiệm vụ chính (Task) | Phân hệ phụ trách |
-| :---: | :--- | :---: | :---: | :--- |
-| 1 | **Lê Võ Đăng Khoa** | **Nhóm trưởng** | **Task 4** | Khởi chạy App, Test tích hợp, Quản lý tiến độ (`main.cpp`, Build/Debug) |
-| 2 | **Nguyễn Thị Kim Huệ** | **Thành viên** | **Task 1** | Tầng Quản lý dữ liệu dùng chung (`managers/DataManager.h`) |
-| 3 | **Nguyễn Tuấn Phong** | **Thành viên** | **Task 2** | Tầng Đọc/Ghi tập tin dữ liệu (`managers/FileManager.h / .cpp`) |
-| 4 | **Trường** | **Thành viên** | **Task 3** | Tầng Điều khiển giao diện Console (`app/OrderingApp.h / .cpp`) |
+| STT | Họ và Tên | Vai trò | Nhiệm vụ chi tiết & Phân hệ phụ trách | Đánh giá hoàn thành |
+| :---: | :--- | :---: | :--- | :---: |
+| 1 | **Lê Võ Đăng Khoa** | **Nhóm trưởng** | - Phân công, lên ý tưởng, timeline làm việc cho cả nhóm.<br>- Lớp trừu tượng `Product`, Model Giỏ hàng (`CartItem`, `ShoppingCart`), Đơn hàng (`Order`), Khách hàng (`Person`, `Customer`).<br>- Nghiên cứu & triển khai các tính năng sáng tạo mới (Phí ship địa chỉ, Batch Add, Strategy Payment, Cancel & Refund 24h, Membership & VIP Points).<br>- Tích hợp hệ thống, Cấu hình Build/Debug & Test nghiệm thu. | **100% Tốt** |
+| 2 | **Trường** | **Thành viên** | - Lớp `ElectronicsProduct`.<br>- Tầng điều khiển ứng dụng (`OrderingApp.h`, `OrderingApp.cpp`).<br>- Góp ý kiến bổ sung về các chức năng sáng tạo (Voucher). | **100% Tốt** |
+| 3 | **Nguyễn Thị Kim Huệ** | **Thành viên** | - Lớp `ClothingProduct`.<br>- Tầng quản lý dữ liệu dùng chung Template Generic (`managers/DataManager.h`). | **100% Tốt** |
+| 4 | **Nguyễn Tuấn Phong** | **Thành viên** | - Lớp `FoodProduct`.<br>- Tầng đọc/ghi tập tin dữ liệu (`managers/FileManager.h`, `managers/FileManager.cpp`). | **100% Tốt** |
 
 ---
 

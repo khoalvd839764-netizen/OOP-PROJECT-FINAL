@@ -614,6 +614,37 @@ void OrderingApp::cancelOrder() {
         cout << "  =================================================================================\n";
     }
 
+    // [FIX - 31/08/2026]: Thu hoi diem tich luy va hoan tra diem voucher Freeship cho tai khoan thanh vien
+    string buyerUsername = foundOrder->getCustomer().getUsername();
+    if (!buyerUsername.empty()) {
+        int earnedPts = foundOrder->getEarnedPoints();
+        bool freeshipUsed = foundOrder->getIsFreeshipApplied();
+
+        for (auto& u : users) {
+            if (u.getUsername() == buyerUsername) {
+                u.deductLoyaltyPoints(earnedPts); // Thu hoi diem thuong
+                if (freeshipUsed) {
+                    u.addLoyaltyPoints(20000);   // Hoan tra 20k diem voucher
+                }
+                if (isLoggedIn && currentCustomer.getUsername() == buyerUsername) {
+                    currentCustomer = u;          // Dong bo trang thai tai khoan hien tai
+                }
+                break;
+            }
+        }
+        FileManager::saveUsers(users, "data/users.txt");
+
+        cout << "---------------------------------------------------------------------------------\n";
+        cout << "  [THU HOI DIEM]       : -" << earnedPts << " pts (Diem thuong cua don hang da bi thu hoi)\n";
+        if (freeshipUsed) {
+            cout << "  [HOAN TRA VOUCHER]   : +20.000 pts (Da hoan lai diem voucher Freeship vao vi)\n";
+        }
+        if (isLoggedIn && currentCustomer.getUsername() == buyerUsername) {
+            cout << "  [SO DU DIEM MOI]     : " << currentCustomer.getLoyaltyPoints() << " pts (" << currentCustomer.getMembershipTier() << ")\n";
+        }
+        cout << "---------------------------------------------------------------------------------\n";
+    }
+
     // Ghi de cap nhat lai file orders.txt
     FileManager::rewriteAllOrders(orders, "data/orders.txt");
     cout << "-> Da tu dong hoan tra lai so luong san pham vao kho va cap nhat file du lieu!\n";

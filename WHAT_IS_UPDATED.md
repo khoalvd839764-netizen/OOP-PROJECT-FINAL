@@ -213,16 +213,22 @@ void OrderingApp::cancelOrder() {
         foundOrder->setStatus("Cancelled");
         cout << "[THANH CONG]: Don hang COD da duoc huy thanh cong!\n";
     }
-    // 3. Ghi đè file orders.txt
+    // 3. Chống gian lận: Thu hồi điểm tích lũy & Hoàn trả 20k điểm voucher Freeship
+    buyer.deductLoyaltyPoints(foundOrder->getEarnedPoints());
+    if (foundOrder->getIsFreeshipApplied()) {
+        buyer.addLoyaltyPoints(20000);
+    }
+    // 4. Ghi đè file orders.txt & users.txt
     FileManager::rewriteAllOrders(orders, "data/orders.txt");
+    FileManager::saveUsers(users, "data/users.txt");
 }
 ```
 
 #### ❓ Vì sao sửa?
-* **Code cũ:** Khách đặt nhầm không có cách nào hủy, số lượng tồn kho bị trừ mất vĩnh viễn gây sai lệch dữ liệu kho.
+* **Code cũ:** Khách đặt nhầm không có cách nào hủy, số lượng tồn kho bị trừ mất vĩnh viễn gây sai lệch dữ liệu kho. Ngoài ra có **lỗ hổng gian lận điểm (Points Exploit)**: khách đặt đơn để lấy điểm thưởng rồi hủy đơn nhưng vẫn giữ điểm.
 
 #### 🎯 Mục đích:
-* Đơn COD hủy ngay; Đơn TPBank tiếp nhận và in thông báo **hoàn tiền trong 24h làm việc**; Tự động cộng trả lại tồn kho vào hệ thống.
+* Đơn COD hủy ngay; Đơn TPBank tiếp nhận và in thông báo **hoàn tiền trong 24h làm việc**; Tự động cộng trả lại tồn kho vào hệ thống; **Thu hồi đúng số điểm thưởng đã cộng từ đơn hủy và hoàn trả lại 20.000 điểm voucher Freeship (nếu có)**, đồng bộ dữ liệu vào `users.txt`.
 
 ---
 

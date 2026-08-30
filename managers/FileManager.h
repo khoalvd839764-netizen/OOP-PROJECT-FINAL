@@ -21,4 +21,4 @@ public:
     static void saveUsers(const std::vector<Customer>& users, const std::string& filename);
 };
 
-#endif
+#endif // FILE_MANAGER_H

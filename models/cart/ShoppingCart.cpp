@@ -3,10 +3,10 @@
 
 ShoppingCart::ShoppingCart() {}
 
+// Them san pham vao gio: tu dong cong don so luong neu da co trong gio
 void ShoppingCart::addItem(std::shared_ptr<Product> product, int quantity) {
     if (!product || quantity <= 0) return;
 
-    // Kiem tra xem san pham da co trong gio chua -> neu co thi tang so luong
     for (auto& item : items) {
         if (item.getProduct() && item.getProduct()->getId() == product->getId()) {
             item.setQuantity(item.getQuantity() + quantity);
@@ -14,7 +14,6 @@ void ShoppingCart::addItem(std::shared_ptr<Product> product, int quantity) {
         }
     }
 
-    // Neu chua co thi tao CartItem moi
     items.push_back(CartItem(product, quantity));
 }
 

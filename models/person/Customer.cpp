@@ -44,13 +44,25 @@ int Customer::getLoyaltyPoints() const {
 }
 
 void Customer::setLoyaltyPoints(int points) {
-    this->loyaltyPoints = points;
+    if (points >= 0) {
+        this->loyaltyPoints = points;
+    }
 }
 
 void Customer::addLoyaltyPoints(int points) {
-    this->loyaltyPoints += points;
+    if (points > 0) {
+        this->loyaltyPoints += points;
+    }
 }
 
+// [FIX - 31/08/2026]: Thu hoi diem khi huy don hang (chong gian lan tich diem), dam bao diem >= 0
+void Customer::deductLoyaltyPoints(int points) {
+    if (points > 0) {
+        this->loyaltyPoints = (this->loyaltyPoints >= points) ? (this->loyaltyPoints - points) : 0;
+    }
+}
+
+// [FIX - 30/08/2026]: Doi 20.000 diem lay 1 lan Freeship
 bool Customer::usePointsForFreeship() {
     if (loyaltyPoints >= 20000) {
         loyaltyPoints -= 20000;
@@ -59,6 +71,7 @@ bool Customer::usePointsForFreeship() {
     return false;
 }
 
+// [FIX - 30/08/2026]: Phan hang thanh vien theo moc diem tich luy
 std::string Customer::getMembershipTier() const {
     if (loyaltyPoints >= 1000000) {
         return "Thanh vien VANG (Giam 15%)";
@@ -70,6 +83,7 @@ std::string Customer::getMembershipTier() const {
     return "Thanh vien Tieu Chuan (0%)";
 }
 
+// [FIX - 30/08/2026]: Ty le chiet khau giam gia truc tiep tren don hang
 double Customer::getTierDiscountRate() const {
     if (loyaltyPoints >= 1000000) {
         return 0.15; // Giam 15%

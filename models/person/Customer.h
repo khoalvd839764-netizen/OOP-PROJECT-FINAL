@@ -5,11 +5,13 @@
 #include <vector>
 #include <string>
 
+// Lop Khach hang & Tai khoan thanh vien (Tich diem, Doi Freeship, Phan hang VIP)
 class Customer : public Person {
 private:
     std::string customerId;
     std::string address;
     std::vector<std::string> orderHistory; // Danh sach ma don hang da dat
+    
     // [FIX - 30/08/2026]: Bo sung tai khoan thanh vien, diem thuong va phan hang VIP
     std::string username;
     std::string password;
@@ -33,8 +35,10 @@ public:
     int getLoyaltyPoints() const;
     void setLoyaltyPoints(int points);
     void addLoyaltyPoints(int points);
-    bool usePointsForFreeship();
+    void deductLoyaltyPoints(int points); // [FIX - 31/08/2026]: Thu hoi diem khi huy don hang
+    bool usePointsForFreeship(); // Doi 20.000 diem lay 1 lan Freeship
 
+    // Phan hang thanh vien va chiet khau: Dong (3%), Bac (5%), Vang (15%)
     std::string getMembershipTier() const;
     double getTierDiscountRate() const;
 
@@ -45,4 +49,4 @@ public:
     void displayInfo() const override;
 };
 
-#endif
+#endif // CUSTOMER_H

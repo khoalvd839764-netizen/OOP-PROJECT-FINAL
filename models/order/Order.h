@@ -20,6 +20,7 @@ private:
     double shippingFee;
     double totalAmount;
     std::string status;
+    
     // [FIX - 30/08/2026]: Bo sung thuoc tinh Phuong thuc thanh toan (Strategy Pattern)
     std::shared_ptr<PaymentMethod> paymentMethod;
     // [FIX - 30/08/2026]: Bo sung thong tin giam gia VIP, voucher Freeship va diem tich luy
@@ -61,4 +62,4 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Order& order);
 };
 
-#endif
+#endif // ORDER_H

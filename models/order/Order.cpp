@@ -98,53 +98,18 @@ double Order::calculateTotal() const {
     return sum + shippingFee;
 }
 
-std::string Order::getOrderId() const {
-    return orderId;
-}
-
-Customer Order::getCustomer() const {
-    return customer;
-}
-
-const std::vector<CartItem>& Order::getItems() const {
-    return items;
-}
-
-std::string Order::getOrderDate() const {
-    return orderDate;
-}
-
-std::string Order::getExpectedDelivery() const {
-    return expectedDeliveryDate;
-}
-
-double Order::getShippingFee() const {
-    return shippingFee;
-}
-
-double Order::getTotalAmount() const {
-    return totalAmount;
-}
-
-double Order::getDiscountAmount() const {
-    return discountAmount;
-}
-
-int Order::getEarnedPoints() const {
-    return earnedPoints;
-}
-
-bool Order::getIsFreeshipApplied() const {
-    return isFreeshipApplied;
-}
-
-std::string Order::getStatus() const {
-    return status;
-}
-
-std::shared_ptr<PaymentMethod> Order::getPaymentMethod() const {
-    return paymentMethod;
-}
+std::string Order::getOrderId() const { return orderId; }
+Customer Order::getCustomer() const { return customer; }
+const std::vector<CartItem>& Order::getItems() const { return items; }
+std::string Order::getOrderDate() const { return orderDate; }
+std::string Order::getExpectedDelivery() const { return expectedDeliveryDate; }
+double Order::getShippingFee() const { return shippingFee; }
+double Order::getTotalAmount() const { return totalAmount; }
+double Order::getDiscountAmount() const { return discountAmount; }
+int Order::getEarnedPoints() const { return earnedPoints; }
+bool Order::getIsFreeshipApplied() const { return isFreeshipApplied; }
+std::string Order::getStatus() const { return status; }
+std::shared_ptr<PaymentMethod> Order::getPaymentMethod() const { return paymentMethod; }
 
 void Order::setStatus(const std::string& status) {
     this->status = status;
@@ -195,7 +160,6 @@ void Order::displayOrder() const {
     std::cout << "  Diem tich luy duoc: +" << earnedPoints << " pts (Moi 10k VND duoc +1.000 diem)\n";
     std::cout << "=========================================================================================\n";
 
-    // In huong dan thanh toan chuyen khoan neu can
     if (paymentMethod) {
         paymentMethod->displayGuide(orderId, totalAmount);
     }

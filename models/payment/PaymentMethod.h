@@ -14,7 +14,7 @@ public:
     virtual void displayGuide(const std::string& orderId, double amount) const = 0;
 };
 
-// 1. Thanh toan tien mat (COD)
+// 1. Thanh toan tien mat khi nhan hang (COD)
 class CashPayment : public PaymentMethod {
 public:
     std::string getMethodName() const override {
@@ -64,4 +64,4 @@ public:
     }
 };
 
-#endif
+#endif // PAYMENT_METHOD_H

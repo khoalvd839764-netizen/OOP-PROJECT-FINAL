@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 
+// Lop Gio hang: Quan ly danh sach cac CartItem, ho tro don so luong
 class ShoppingCart {
 private:
     std::vector<CartItem> items;
@@ -26,6 +27,7 @@ public:
     bool isEmpty() const;
     void displayCart() const;
 
+    // Nap chong toan tu
     ShoppingCart& operator+=(const CartItem& item);
     CartItem& operator[](int index);
     const CartItem& operator[](int index) const;
@@ -33,4 +35,4 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const ShoppingCart& cart);
 };
 
-#endif
+#endif // SHOPPING_CART_H

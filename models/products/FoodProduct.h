@@ -3,10 +3,11 @@
 
 #include "Product.h"
 
+// Lop Thuc pham: co han su dung va dac tinh huu co (Organic tang 5% gia)
 class FoodProduct : public Product {
 private:
-    std::string expiryDate;
-    bool isOrganic;
+    std::string expiryDate; // Han su dung (YYYY-MM-DD)
+    bool isOrganic;         // Co huu co
 
 public:
     FoodProduct();
@@ -22,4 +23,4 @@ public:
     Product* clone() const override;
 };
 
-#endif
+#endif // FOOD_PRODUCT_H

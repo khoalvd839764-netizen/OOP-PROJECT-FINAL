@@ -2,6 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra
 
 TARGET = ordering_app
+BUILD_DIR = build
 
 SRCS = main.cpp \
        models/products/Product.cpp \
@@ -16,17 +17,21 @@ SRCS = main.cpp \
        managers/FileManager.cpp \
        app/OrderingApp.cpp
 
-OBJS = $(SRCS:.cpp=.o)
+OBJS = $(patsubst %.cpp, $(BUILD_DIR)/%.o, $(SRCS))
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-%.o: %.cpp
+$(BUILD_DIR)/%.o: %.cpp
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -rf $(BUILD_DIR) $(TARGET)
 
-.PHONY: all clean
+run: all
+	./$(TARGET)
+
+.PHONY: all clean run

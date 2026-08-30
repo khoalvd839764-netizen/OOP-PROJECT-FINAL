@@ -1,4 +1,5 @@
 #include "FoodProduct.h"
+#include <iomanip>
 
 FoodProduct::FoodProduct()
     : Product("", "", "Food", 0, 0), expiryDate(""), isOrganic(false) {}
@@ -18,11 +19,15 @@ bool FoodProduct::getIsOrganic() const {
     return isOrganic;
 }
 
+// [FIX - 30/08/2026]: Can chinh cot bang displayInfo() thang hang, deu cot dep mat
 void FoodProduct::displayInfo() const {
-    std::cout << "[FOOD] " << name
-              << " | " << price << " VND"
-              << " | HSD: " << expiryDate
-              << " | Hữu cơ: " << (isOrganic ? "Có" : "Không")
+    std::cout << std::left << std::setw(12) << "FOOD"
+              << " | " << std::setw(6) << id
+              << " | " << std::setw(22) << name
+              << " | " << std::right << std::setw(10) << std::fixed << std::setprecision(0) << price << " VND"
+              << " | " << std::setw(7) << stockQuantity
+              << " | HSD: " << std::left << std::setw(12) << expiryDate
+              << " | Huu co: " << (isOrganic ? "Co" : "Khong")
               << '\n';
 }
 

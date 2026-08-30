@@ -96,6 +96,12 @@ void FileManager::saveOrder(const Order& order, const std::string& filename) {
     outputFile << "NGAY DAT         : " << order.getOrderDate() << '\n';
     outputFile << "NGAY GIAO DU KIEN: " << order.getExpectedDelivery() << '\n';
     outputFile << "TRANG THAI       : " << order.getStatus() << '\n';
+    // [FIX - 30/08/2026]: Ghi thong tin phuong thuc thanh toan vao file orders.txt
+    auto pm = order.getPaymentMethod();
+    outputFile << "PHUONG THUC TT   : " << (pm ? pm->getMethodName() : "Tien mat (COD)") << '\n';
+    if (pm) {
+        outputFile << "CHI TIET TT      : " << pm->getPaymentDetails(order.getOrderId()) << '\n';
+    }
     outputFile << "TEN KHACH HANG   : " << customer.getName() << '\n';
     outputFile << "SO DIEN THOAI    : " << customer.getPhone() << '\n';
     outputFile << "EMAIL            : " << customer.getEmail() << '\n';
@@ -119,6 +125,124 @@ void FileManager::saveOrder(const Order& order, const std::string& filename) {
     outputFile << std::fixed << std::setprecision(0);
     outputFile << "PHI GIAO HANG    : " << order.getShippingFee() << " VND\n";
     outputFile << "TONG THANH TOAN  : " << order.getTotalAmount() << " VND\n";
+    outputFile << "=========================================================\n\n";
+
+    outputFile.close();
+}
+
+// [FIX - 30/08/2026]: Ghi de toan bo danh sach don hang khi co cap nhat trang thai huy
+void FileManager::rewriteAllOrders(const std::vector<Order>& orders, const std::string& filename) {
+    std::ofstream outputFile(filename, std::ios::trunc);
+
+    if (!outputFile.is_open()) {
+        std::cerr << "Khong the mo file de cap nhat don hang: " << filename << '\n';
+        return;
+    }
+
+    for (const Order& order : orders) {
+        const Customer customer = order.getCustomer();
+        outputFile << "MA DON HANG      : " << order.getOrderId() << '\n';
+        outputFile << "NGAY DAT         : " << order.getOrderDate() << '\n';
+        outputFile << "NGAY GIAO DU KIEN: " << order.getExpectedDelivery() << '\n';
+        outputFile << "TRANG THAI       : " << order.getStatus() << '\n';
+        auto pm = order.getPaymentMethod();
+        outputFile << "PHUONG THUC TT   : " << (pm ? pm->getMethodName() : "Tien mat (COD)") << '\n';
+        if (pm) {
+            outputFile << "CHI TIET TT      : " << pm->getPaymentDetails(order.getOrderId()) << '\n';
+        }
+        outputFile << "TEN KHACH HANG   : " << customer.getName() << '\n';
+        outputFile << "SO DIEN THOAI    : " << customer.getPhone() << '\n';
+        outputFile << "EMAIL            : " << customer.getEmail() << '\n';
+        outputFile << "DIA CHI          : " << customer.getAddress() << '\n';
+        outputFile << "DANH SACH SAN PHAM:\n";
+
+        for (const CartItem& item : order.getItems()) {
+            const std::shared_ptr<Product> product = item.getProduct();
+            if (product == nullptr) {
+                continue;
+            }
+
+            outputFile << "  - " << product->getId()
+                       << " | " << product->getName()
+                       << " | So luong: " << item.getQuantity()
+                       << " | Don gia: " << std::fixed << std::setprecision(0)
+                       << product->calculateFinalPrice() << " VND"
+                       << " | Thanh tien: " << item.getSubtotal() << " VND\n";
+        }
+
+        outputFile << std::fixed << std::setprecision(0);
+        outputFile << "PHI GIAO HANG    : " << order.getShippingFee() << " VND\n";
+        outputFile << "TONG THANH TOAN  : " << order.getTotalAmount() << " VND\n";
+        outputFile << "=========================================================\n\n";
+    }
+
+    outputFile.close();
+}
+
+// [FIX - 30/08/2026]: Doc danh sach tai khoan nguoi dung tu file users.txt
+std::vector<Customer> FileManager::loadUsers(const std::string& filename) {
+    std::vector<Customer> users;
+    std::ifstream inputFile(filename);
+
+    if (!inputFile.is_open()) {
+        std::cerr << "Khong the mo file nguoi dung: " << filename << '\n';
+        return users;
+    }
+
+    std::string line;
+    int index = 1;
+    while (std::getline(inputFile, line)) {
+        if (!line.empty() && line.back() == '\r') {
+            line.pop_back();
+        }
+        if (line.empty()) continue;
+
+        std::stringstream ss(line);
+        std::string username, password, name, phone, email, address, ptsStr;
+
+        if (std::getline(ss, username, '|') &&
+            std::getline(ss, password, '|') &&
+            std::getline(ss, name, '|') &&
+            std::getline(ss, phone, '|') &&
+            std::getline(ss, email, '|') &&
+            std::getline(ss, address, '|') &&
+            std::getline(ss, ptsStr)) {
+
+            int points = 0;
+            try {
+                points = std::stoi(ptsStr);
+            } catch (...) {
+                points = 0;
+            }
+
+            std::string custId = "USER-" + std::to_string(index++);
+            users.emplace_back(custId, name, phone, email, address, username, password, points);
+        }
+    }
+
+    inputFile.close();
+    return users;
+}
+
+// [FIX - 30/08/2026]: Ghi danh sach tai khoan nguoi dung vao file users.txt
+void FileManager::saveUsers(const std::vector<Customer>& users, const std::string& filename) {
+    std::ofstream outputFile(filename, std::ios::trunc);
+
+    if (!outputFile.is_open()) {
+        std::cerr << "Khong the mo file de luu nguoi dung: " << filename << '\n';
+        return;
+    }
+
+    for (const auto& user : users) {
+        if (user.getUsername().empty()) continue; // Khong luu khach vang lai
+        outputFile << user.getUsername() << '|'
+                   << user.getPassword() << '|'
+                   << user.getName() << '|'
+                   << user.getPhone() << '|'
+                   << user.getEmail() << '|'
+                   << user.getAddress() << '|'
+                   << user.getLoyaltyPoints() << '\n';
+    }
 
     outputFile.close();
 }

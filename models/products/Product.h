@@ -34,6 +34,8 @@ class Product {
     string getCategory() const {return category;}
     double getPrice() const {return price;}
     int getStockQuantity() const {return stockQuantity;}
+    // [FIX - 30/08/2026]: Them alias getStock() de dong bo voi cach goi ham trong OrderingApp
+    int getStock() const {return stockQuantity;}
 
     void setPrice(double price);
     void setStockQuantity(int stockQuantity);

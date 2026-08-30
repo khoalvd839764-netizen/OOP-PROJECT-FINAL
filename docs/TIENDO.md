@@ -1,8 +1,8 @@
 # 📊 BẢNG THEO DÕI TIẾN ĐỘ DỰ ÁN (PROJECT PROGRESS)
 
 > **Dự án:** Ordering Application (Project 1 - OOP Final Project)  
-> **Cập nhật lần cuối:** 27/08/2026  
-> **Tổng tiến độ hoàn thành:** `[██████████████████░░] 90%`
+> **Cập nhật lần cuối:** 30/08/2026  
+> **Tổng tiến độ hoàn thành:** `[████████████████████] 100% HOÀN TẤT 🏆`
 
 ---
 
@@ -14,7 +14,7 @@
 | **2** | **Khối Người Dùng (Person & Customer)** | `models/person/` | 2/2 | ✅ **Đã hoàn thành** | **100%** |
 | **3** | **Khối Giỏ Hàng & Đơn Hàng (Cart & Order)** | `models/cart/`, `models/order/` | 3/3 | ✅ **Đã hoàn thành** | **100%** |
 | **4** | **Khối Quản Lý Dữ Liệu & File (Managers)** | `managers/` | 2/2 | ✅ **Đã hoàn thành** | **100%** |
-| **5** | **Khối Điều Khiển Ứng Dụng (App Controller)** | `app/`, `main.cpp` | 1/1 | ⏳ **Đang triển khai** | **0%** |
+| **5** | **Khối Điều Khiển Ứng Dụng (App Controller)** | `app/`, `main.cpp` | 1/1 | ✅ **Đã hoàn thành** | **100%** |
 
 ---
 
@@ -59,24 +59,24 @@
 
 ---
 
-### 🎮 Khối 5: Điều Khiển Ứng Dụng & Cấu Hình Build — [ĐANG TRIỂN KHAI ⏳]
+### 🎮 Khối 5: Điều Khiển Ứng Dụng & Cấu Hình Build — [ĐÃ XONG 100% ✅]
 
 | File | Thành phần | Người phụ trách | Chức năng cần làm | Trạng thái |
 | :--- | :--- | :--- | :--- | :---: |
-| `OrderingApp.h` / `.cpp` | `OrderingApp` | **👤 Trường** | Menu tương tác Console 6 chức năng chính | ⏳ Chưa xong |
-| `main.cpp` | `main` | **👤 Đăng Khoa (Leader)** | Khởi động chương trình, nghiệm thu toàn bộ app | ⏳ Chưa xong |
-| `data/products.txt` | Data File | **👤 Đã xong** | Dữ liệu mẫu 6 sản phẩm | ✅ **Xong** |
-| `Makefile` | Build Script | **👤 Đã xong** | Lệnh `make` biên dịch tự động toàn bộ project | ✅ **Xong** |
+| `OrderingApp.h` / `.cpp` | `OrderingApp` | **👤 Trường** | Menu tương tác Console 6 chức năng chính | ✅ **Xong** |
+| `main.cpp` | `main` | **👤 Đăng Khoa (Leader)** | Khởi động chương trình, nghiệm thu toàn bộ app | ✅ **Xong** |
+| `data/products.txt` | Data File | **👤 Cả nhóm** | Dữ liệu mẫu 6 sản phẩm | ✅ **Xong** |
+| `Makefile` | Build Script | **👤 Đăng Khoa** | Lệnh `make` biên dịch tự động toàn bộ project | ✅ **Xong** |
 
 ---
 
-## 🏆 3. CHECKLIST YÊU CẦU ĐỀ BÀI PROJECT 1
+## 🏆 3. CHECKLIST YÊU CẦU ĐỀ BÀI PROJECT 1 (100% PASS)
 
-- [x] Đọc danh sách sản phẩm từ file `.txt` (Đã chuẩn bị format `data/products.txt`).
+- [x] Đọc danh sách sản phẩm từ file `.txt` (Đã hoàn thiện trong `FileManager::loadProducts`).
 - [x] Hiển thị danh sách sản phẩm (Đã hoàn thiện hàm `displayInfo()` đa hình cho 3 loại sản phẩm).
-- [x] Thêm sản phẩm vào giỏ hàng nhiều lần (Đã hoàn thiện logic dồn số lượng trong `ShoppingCart`).
+- [x] Thêm sản phẩm vào giỏ hàng nhiều lần (Đã hoàn thiện logic dồn số lượng trong `ShoppingCart::addItem`).
 - [x] Xem giỏ hàng & tính thành tiền (Đã hoàn thiện trong `CartItem` và `ShoppingCart`).
-- [x] Đặt hàng & Nhập thông tin khách hàng, địa chỉ (Đã hoàn thiện trong `Customer`).
+- [x] Đặt hàng & Nhập thông tin khách hàng, địa chỉ (Đã hoàn thiện trong `Customer` và `OrderingApp::placeOrder`).
 - [x] Hiển thị & xác nhận đơn hàng (Đã hoàn thiện trong `Order`: ngày đặt hệ thống, ngày giao dự kiến, phí ship, tổng tiền).
-- [x] Áp dụng đầy đủ OOP (Đóng gói, Kế thừa, Đa hình, Lớp trừu tượng, Nạp chồng toán tử).
-- [x] Sử dụng STL Container (`vector`, `string`, `shared_ptr`, `iomanip`, `ctime`).
+- [x] Áp dụng đầy đủ OOP (Đóng gói, Kế thừa, Đa hình, Lớp trừu tượng, Nạp chồng toán tử, Templates).
+- [x] Sử dụng STL Container (`vector`, `string`, `shared_ptr`, `iomanip`, `ctime`, `algorithm`, `functional`).

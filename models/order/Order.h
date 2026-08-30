@@ -3,10 +3,12 @@
 
 #include "../person/Customer.h"
 #include "../cart/CartItem.h"
+#include "../payment/PaymentMethod.h"
 #include <vector>
 #include <string>
 #include <ctime>
 #include <iostream>
+#include <memory>
 
 class Order {
 private:
@@ -18,16 +20,25 @@ private:
     double shippingFee;
     double totalAmount;
     std::string status;
+    // [FIX - 30/08/2026]: Bo sung thuoc tinh Phuong thuc thanh toan (Strategy Pattern)
+    std::shared_ptr<PaymentMethod> paymentMethod;
+    // [FIX - 30/08/2026]: Bo sung thong tin giam gia VIP, voucher Freeship va diem tich luy
+    double discountAmount;
+    bool isFreeshipApplied;
+    int earnedPoints;
 
     static std::string generateOrderId();
     static std::string getSystemDate();
-    static std::string calcExpectedDelivery();
+    // [FIX - 30/08/2026]: Cap nhat tinh phi giao hang va thoi gian giao theo khu vuc (TPHCM/HN 10k/1ngay, tinh khac 25k/3ngay)
+    bool isInnerCityArea(const std::string& address) const;
+    std::string calcExpectedDelivery() const;
     double calculateShipping() const;
     double calculateTotal() const;
 
 public:
     Order();
-    Order(const Customer& customer, const std::vector<CartItem>& items);
+    Order(const Customer& customer, const std::vector<CartItem>& items, 
+          std::shared_ptr<PaymentMethod> paymentMethod = nullptr, bool useFreeshipVoucher = false);
 
     std::string getOrderId() const;
     Customer getCustomer() const;
@@ -36,7 +47,11 @@ public:
     std::string getExpectedDelivery() const;
     double getShippingFee() const;
     double getTotalAmount() const;
+    double getDiscountAmount() const;
+    int getEarnedPoints() const;
+    bool getIsFreeshipApplied() const;
     std::string getStatus() const;
+    std::shared_ptr<PaymentMethod> getPaymentMethod() const;
 
     void setStatus(const std::string& status);
 

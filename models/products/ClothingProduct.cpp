@@ -1,5 +1,6 @@
 #include "ClothingProduct.h"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -28,12 +29,15 @@ string ClothingProduct::getMaterial() const {
     return material;
 }
 
+// [FIX - 30/08/2026]: Can chinh cot bang displayInfo() thang hang, deu cot dep mat
 void ClothingProduct::displayInfo() const {
-    cout << "[CLOTHING] "
-         << getName()
-         << " | " << getPrice() << " VND"
-         << " | Size: " << size
-         << " | Chất liệu: " << material
+    cout << left << setw(12) << "CLOTHING"
+         << " | " << setw(6) << getId()
+         << " | " << setw(22) << getName()
+         << " | " << right << setw(10) << fixed << setprecision(0) << getPrice() << " VND"
+         << " | " << setw(7) << getStockQuantity()
+         << " | Size: " << left << setw(11) << size
+         << " | Chat lieu: " << material
          << endl;
 }
 

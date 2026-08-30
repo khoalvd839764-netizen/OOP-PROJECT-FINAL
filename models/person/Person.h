@@ -14,6 +14,8 @@ public:
     Person();
     Person(const std::string& name, const std::string& phone, const std::string& email);
     Person(const Person& other);
+    // [FIX - 30/08/2026]: Khai bao explicitly operator= default de khong bi warning -Wdeprecated-copy tren gcc/clang
+    Person& operator=(const Person& other) = default;
     virtual ~Person() = default;
 
     std::string getName() const;

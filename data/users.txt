@@ -1,0 +1,4 @@
+khoa|123456|Nguyen Dang Khoa|0909123456|khoa@gmail.com|123 Nguyen Hue, TPHCM|1061237
+huenguyen|123456|Kim Hue|0912345678|hue@gmail.com|45 Tran Phu, Da Nang|550000
+phongtuan|123456|Tuan Phong|0933333333|phong@gmail.com|Hoan Kiem, Ha Noi|250000
+KHOA|123|LE VO DANG KHOA|0862983971|112|HN|336000

@@ -14,10 +14,14 @@ string ElectronicsProduct::getBrand() const {
     return brand;
 }
 
+// [FIX - 30/08/2026]: Can chinh cot bang displayInfo() thang hang, deu cot dep mat
 void ElectronicsProduct::displayInfo() const {
-    cout << "[ELECTRONICS] " << name 
-         << " | " << fixed << setprecision(0) << price << " VND"
-         << " | Hang: " << brand 
+    cout << left << setw(12) << "ELECTRONICS"
+         << " | " << setw(6) << id
+         << " | " << setw(22) << name
+         << " | " << right << setw(10) << fixed << setprecision(0) << price << " VND"
+         << " | " << setw(7) << stockQuantity
+         << " | Hang: " << left << setw(11) << brand
          << " | Bao hanh: " << warrantyMonths << " thang\n";
 }
 

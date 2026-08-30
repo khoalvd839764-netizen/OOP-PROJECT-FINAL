@@ -19,12 +19,6 @@
 [BƯỚC 4: VỀ ĐÍCH 🏆]     ──► main.cpp & Makefile        (Chạy toàn bộ ứng dụng từ A-Z)
 ```
 
-> **Lý do thứ tự này:**
-> 1. `DataManager<T>` hoàn toàn độc lập, là "cái kho" để chứa dữ liệu.
-> 2. `FileManager` là "thợ đọc/ghi file", đọc file xong sẽ nạp dữ liệu vào `DataManager`.
-> 3. `OrderingApp` cần cả 2 class trên để hoạt động (lấy kho từ `DataManager` và gọi `FileManager` lưu đơn).
-> 4. `main.cpp` chỉ việc bật `OrderingApp` lên chạy.
-
 ---
 
 ## 👥 BẢNG PHÂN CÔNG NHIỆM VỤ
@@ -33,8 +27,8 @@
 | :---: | :--- | :--- | :---: | :---: |
 | **Task 1** | `managers/DataManager.h` | `👤 KIM HUỆ` | 🔴 **Ưu tiên 1 (Làm trước)** | ✅ **Đã hoàn thành** |
 | **Task 2** | `managers/FileManager.h / .cpp` | `👤 TUẤN PHONG` | 🟠 **Ưu tiên 2 (Làm kế tiếp)** | ✅ **Đã hoàn thành** |
-| **Task 3** | `app/OrderingApp.h / .cpp` | `👤 TRƯỜNG` | 🟡 **Ưu tiên 3 (Làm sau 1 & 2)** | ⏳ Chưa xong |
-| **Task 4** | `main.cpp` & Test Nghiệm Thu | `👤 ĐĂNG KHOA (Leader)` | 🟢 **Ưu tiên 4 (Về đích)** | ⏳ Chưa xong |
+| **Task 3** | `app/OrderingApp.h / .cpp` | `👤 TRƯỜNG` | 🟡 **Ưu tiên 3 (Làm sau 1 & 2)** | ✅ **Đã hoàn thành** |
+| **Task 4** | `main.cpp` & Test Nghiệm Thu | `👤 ĐĂNG KHOA (Leader)` | 🟢 **Ưu tiên 4 (Về đích)** | ✅ **Đã hoàn thành** |
 
 ---
 
@@ -84,41 +78,15 @@
 * **👤 Người thực hiện:** `TRƯỜNG`
 * **📁 File cần code:** `app/OrderingApp.h` và `app/OrderingApp.cpp`
 * **Đặc điểm:** "Bộ não" điều phối tương tác Console giữa người dùng và toàn bộ hệ thống.
-* **Thuộc tính trong `OrderingApp`:**
-  ```cpp
-  DataManager<std::shared_ptr<Product>> productManager; // Kho sản phẩm
-  ShoppingCart cart;                                     // Giỏ hàng hiện tại
-  Customer currentCustomer;                             // Khách hàng hiện tại
-  std::vector<Order> orders;                            // Danh sách đơn đã đặt
-  ```
 * **Nhiệm vụ cụ thể:**
-  - [ ] **Constructor `OrderingApp()`:** Gọi `FileManager::loadProducts("data/products.txt")` rồi nạp vào `productManager`.
-  - [ ] **Hàm `run()`:** Vòng lặp `while (true)` hiển thị menu 6 chức năng:
-    ```
-    ================================================
-               HE THONG DAT HANG ONLINE             
-    ================================================
-    1. Xem danh sach san pham
-    2. Tim kiem san pham theo ten
-    3. Them san pham vao gio hang
-    4. Xem chi tiet gio hang
-    5. Tien hanh dat hang & Thanh toan
-    6. Xem lich su cac don hang da dat
-    0. Thoat chuong trinh
-    ------------------------------------------------
-    Nhap lua chon cua ban: 
-    ```
-  - [ ] **Chức năng 1 (`showProducts`):** Lấy danh sách từ `productManager.getAll()` và gọi `displayInfo()` (đa hình).
-  - [ ] **Chức năng 2 (`searchProducts`):** Nhập từ khóa $\rightarrow$ gọi `productManager.filter(...)` $\rightarrow$ in kết quả.
-  - [ ] **Chức năng 3 (`addToCart`):** Nhập mã SP $\rightarrow$ tìm trong `productManager` $\rightarrow$ kiểm tra tồn kho $\rightarrow$ gọi `cart.addItem(prod, qty)`.
-  - [ ] **Chức năng 4 (`viewCart`):** Gọi `cout << cart` (in bảng giỏ hàng).
-  - [ ] **Chức năng 5 (`placeOrder`):** 
-    * Kiểm tra giỏ hàng có rỗng không.
-    * Nhập thông tin khách hàng (Họ tên, SĐT, Email, Địa chỉ giao hàng).
-    * Tạo `Customer` $\rightarrow$ Tạo `Order(customer, cart.getItems())`.
-    * In hóa đơn ra màn hình và hỏi xác nhận `(Y/N)`.
-    * Nếu `Y`: Lưu vào `orders`, gọi `FileManager::saveOrder(...)`, dọn sạch giỏ `cart.clear()`.
-  - [ ] **Chức năng 6 (`viewOrderHistory`):** Duyệt `orders` và in các đơn đã đặt.
+  - [x] **Constructor `OrderingApp()`:** Gọi `FileManager::loadProducts("data/products.txt")` rồi nạp vào `productManager`.
+  - [x] **Hàm `run()`:** Vòng lặp `while (true)` hiển thị menu 6 chức năng.
+  - [x] **Chức năng 1 (`showProducts`):** Lấy danh sách từ `productManager.getAll()` và gọi `displayInfo()` (đa hình).
+  - [x] **Chức năng 2 (`searchProducts`):** Nhập từ khóa $\rightarrow$ gọi `productManager.filter(...)` $\rightarrow$ in kết quả.
+  - [x] **Chức năng 3 (`addToCart`):** Nhập mã SP $\rightarrow$ tìm trong `productManager` $\rightarrow$ kiểm tra tồn kho $\rightarrow$ gọi `cart.addItem(prod, qty)`.
+  - [x] **Chức năng 4 (`viewCart`):** Gọi `cout << cart` (in bảng giỏ hàng).
+  - [x] **Chức năng 5 (`placeOrder`):** Kiểm tra giỏ hàng $\rightarrow$ Nhập thông tin KH $\rightarrow$ Tạo `Order` $\rightarrow$ In hóa đơn xác nhận `(Y/N)` $\rightarrow$ Lưu `orders.txt` và `cart.clear()`.
+  - [x] **Chức năng 6 (`viewOrderHistory`):** Duyệt `orders` và in các đơn đã đặt.
 
 ---
 
@@ -140,9 +108,3 @@
   make clean && make
   ./ordering_app
   ```
-
----
-
-## ⚠️ Lưu ý kỹ thuật quan trọng:
-1. **Xử lý trôi lệnh bàn phím:** Khi vừa nhập số (`cin >> choice`) xong chuyển sang nhập chuỗi (`getline`), phải dùng `cin.ignore(10000, '\n');` để xóa bộ đệm.
-2. **Kiểm tra file tồn tại:** Trong `FileManager::loadProducts`, nếu file `data/products.txt` không mở được phải in cảnh báo rõ ràng.

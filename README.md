@@ -12,7 +12,7 @@
 | STT | Họ và Tên | Vai trò | Nhiệm vụ chi tiết & Phân hệ phụ trách | Đánh giá hoàn thành |
 | :---: | :--- | :---: | :--- | :---: |
 | 1 | **Lê Võ Đăng Khoa** | **Nhóm trưởng** | - Phân công, lên ý tưởng, timeline làm việc cho cả nhóm.<br>- Lớp trừu tượng `Product`, Model Giỏ hàng (`CartItem`, `ShoppingCart`), Đơn hàng (`Order`), Khách hàng (`Person`, `Customer`).<br>- Nghiên cứu & triển khai các tính năng sáng tạo mới (Phí ship địa chỉ, Batch Add, Strategy Payment, Cancel & Refund 24h, Membership & VIP Points).<br>- Tích hợp hệ thống, Cấu hình Build/Debug & Test nghiệm thu. | **100% Tốt** |
-| 2 | **Trường** | **Thành viên** | - Lớp `ElectronicsProduct`.<br>- Tầng điều khiển ứng dụng (`OrderingApp.h`, `OrderingApp.cpp`).<br>- Góp ý kiến bổ sung về các chức năng sáng tạo (Voucher). | **100% Tốt** |
+| 2 | **Tường** | **Thành viên** | - Lớp `ElectronicsProduct`.<br>- Tầng điều khiển ứng dụng (`OrderingApp.h`, `OrderingApp.cpp`).<br>- Góp ý kiến bổ sung về các chức năng sáng tạo (Voucher). | **100% Tốt** |
 | 3 | **Nguyễn Thị Kim Huệ** | **Thành viên** | - Lớp `ClothingProduct`.<br>- Tầng quản lý dữ liệu dùng chung Template Generic (`managers/DataManager.h`). | **100% Tốt** |
 | 4 | **Nguyễn Tuấn Phong** | **Thành viên** | - Lớp `FoodProduct`.<br>- Tầng đọc/ghi tập tin dữ liệu (`managers/FileManager.h`, `managers/FileManager.cpp`). | **100% Tốt** |
 

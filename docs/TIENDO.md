@@ -26,7 +26,7 @@
 | :--- | :--- | :--- | :--- | :---: |
 | `Product.h` / `.cpp` | `Product` | **👤 Đăng Khoa** | Lớp cha trừu tượng, 4 hàm thuần ảo, nạp chồng `==`, `<`, `<<`, `>>` | ✅ **Xong** |
 | `FoodProduct.h` / `.cpp` | `FoodProduct` | **👤 Tuấn Phong** | Kế thừa, HSD, hữu cơ, tính giá $+5\%$ | ✅ **Xong** |
-| `ElectronicsProduct.h` / `.cpp` | `ElectronicsProduct` | **👤 Trường** | Kế thừa, bảo hành, hãng, tính giá $+5\%$ | ✅ **Xong** |
+| `ElectronicsProduct.h` / `.cpp` | `ElectronicsProduct` | **👤 Tường** | Kế thừa, bảo hành, hãng, tính giá $+5\%$ | ✅ **Xong** |
 | `ClothingProduct.h` / `.cpp` | `ClothingProduct` | **👤 Kim Huệ** | Kế thừa, size, chất liệu, tính giá $+10\%$ | ✅ **Xong** |
 
 ---
@@ -63,7 +63,7 @@
 
 | File | Thành phần | Người phụ trách | Chức năng cần làm | Trạng thái |
 | :--- | :--- | :--- | :--- | :---: |
-| `OrderingApp.h` / `.cpp` | `OrderingApp` | **👤 Trường** | Menu tương tác Console 6 chức năng chính | ✅ **Xong** |
+| `OrderingApp.h` / `.cpp` | `OrderingApp` | **👤 Tường** | Menu tương tác Console 6 chức năng chính | ✅ **Xong** |
 | `main.cpp` | `main` | **👤 Đăng Khoa (Leader)** | Khởi động chương trình, nghiệm thu toàn bộ app | ✅ **Xong** |
 | `data/products.txt` | Data File | **👤 Cả nhóm** | Dữ liệu mẫu 6 sản phẩm | ✅ **Xong** |
 | `Makefile` | Build Script | **👤 Đăng Khoa** | Lệnh `make` biên dịch tự động toàn bộ project | ✅ **Xong** |

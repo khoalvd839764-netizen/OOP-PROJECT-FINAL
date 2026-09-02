@@ -246,3 +246,46 @@ void FileManager::saveUsers(const std::vector<Customer>& users, const std::strin
 
     outputFile.close();
 }
+
+// [FIX - 31/08/2026]: Ghi de toan bo danh sach san pham vao data/products.txt khi Admin them/sua/xoa san pham
+void FileManager::saveProducts(const std::vector<std::shared_ptr<Product>>& products, const std::string& filename) {
+    std::ofstream outputFile(filename, std::ios::trunc);
+
+    if (!outputFile.is_open()) {
+        std::cerr << "Khong the mo file de luu danh muc san pham: " << filename << '\n';
+        return;
+    }
+
+    // Dong tieu de
+    outputFile << "TYPE|ID|NAME|PRICE|STOCK|EXTRA1|EXTRA2\n";
+
+    for (const auto& prod : products) {
+        if (!prod) continue;
+        outputFile << std::fixed << std::setprecision(0);
+
+        if (auto food = std::dynamic_pointer_cast<FoodProduct>(prod)) {
+            outputFile << "FOOD|" << food->getId() << '|'
+                       << food->getName() << '|'
+                       << food->getPrice() << '|'
+                       << food->getStockQuantity() << '|'
+                       << food->getExpiryDate() << '|'
+                       << (food->getIsOrganic() ? "true" : "false") << '\n';
+        } else if (auto elec = std::dynamic_pointer_cast<ElectronicsProduct>(prod)) {
+            outputFile << "ELECTRONICS|" << elec->getId() << '|'
+                       << elec->getName() << '|'
+                       << elec->getPrice() << '|'
+                       << elec->getStockQuantity() << '|'
+                       << elec->getWarrantyMonths() << '|'
+                       << elec->getBrand() << '\n';
+        } else if (auto cloth = std::dynamic_pointer_cast<ClothingProduct>(prod)) {
+            outputFile << "CLOTHING|" << cloth->getId() << '|'
+                       << cloth->getName() << '|'
+                       << cloth->getPrice() << '|'
+                       << cloth->getStockQuantity() << '|'
+                       << cloth->getSize() << '|'
+                       << cloth->getMaterial() << '\n';
+        }
+    }
+
+    outputFile.close();
+}

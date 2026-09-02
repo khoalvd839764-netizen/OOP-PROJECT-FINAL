@@ -27,13 +27,13 @@ public:
     std::string getCustomerId() const;
     std::string getAddress() const;
     void setAddress(const std::string& address);
-
     std::string getUsername() const;
     void setUsername(const std::string& username);
     std::string getPassword() const;
     void setPassword(const std::string& password);
     int getLoyaltyPoints() const;
     void setLoyaltyPoints(int points);
+    
     void addLoyaltyPoints(int points);
     void deductLoyaltyPoints(int points); // [FIX - 31/08/2026]: Thu hoi diem khi huy don hang
     bool usePointsForFreeship(); // Doi 20.000 diem lay 1 lan Freeship

@@ -19,6 +19,8 @@ public:
     // [FIX - 30/08/2026]: Doc va ghi danh sach tai khoan nguoi dung (users.txt)
     static std::vector<Customer> loadUsers(const std::string& filename);
     static void saveUsers(const std::vector<Customer>& users, const std::string& filename);
+    // [FIX - 31/08/2026]: Ghi de danh sach san pham vao file products.txt khi Admin them/sua/xoa san pham
+    static void saveProducts(const std::vector<std::shared_ptr<Product>>& products, const std::string& filename);
 };
 
 #endif // FILE_MANAGER_H

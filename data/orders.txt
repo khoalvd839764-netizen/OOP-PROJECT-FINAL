@@ -1,0 +1,17 @@
+MA DON HANG      : ORD-1001
+NGAY DAT         : 04/09/2026
+NGAY GIAO DU KIEN: 05/09/2026
+TRANG THAI       : Cancelled - Cho hoan tien (24h)
+PHUONG THUC TT   : Chuyen khoan Ngan hang (TPBank)
+CHI TIET TT      : TPBank | STK: 000000001 | Chu TK: HKD NHOM3 ORDERAPP | ND: ORD-1001
+TEN KHACH HANG   : KHOA
+SO DIEN THOAI    : 113
+EMAIL            : 123
+DIA CHI          : TPHCM
+DANH SACH SAN PHAM:
+  - F01 | Sua tuoi TH | So luong: 10 | Don gia: 209999 VND | Thanh tien: 2099990 VND
+  - F02 | Banh mi | So luong: 1 | Don gia: 25000 VND | Thanh tien: 25000 VND
+PHI GIAO HANG    : 0 VND
+TONG THANH TOAN  : 2124990 VND
+=========================================================
+

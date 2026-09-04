@@ -9,7 +9,7 @@
 
 using namespace std;
 
-// Ham phu tro xoa khoang trang dau va cuoi chuoi
+// Ham phu tro: Xoa khoang trang o dau va cuoi chuoi
 static string trimString(const string& s) {
     size_t start = s.find_first_not_of(" \t\r\n");
     if (start == string::npos) return "";
@@ -17,7 +17,10 @@ static string trimString(const string& s) {
     return s.substr(start, end - start + 1);
 }
 
-// [FIX - 30/08/2026]: Khoi tao app, load san pham va load danh sach nguoi dung tu users.txt
+// ============================================================================
+// 1. KHOI TAO & NAP DU LIEU (CONSTRUCTOR)
+// ============================================================================
+// Doc danh sach san pham tu data/products.txt va danh sach nguoi dung tu data/users.txt
 OrderingApp::OrderingApp() : isLoggedIn(false), isGuest(false), isAdminLoggedIn(false) {
     vector<shared_ptr<Product>> loaded = FileManager::loadProducts("data/products.txt");
     for (const auto& prod : loaded) {
@@ -26,7 +29,11 @@ OrderingApp::OrderingApp() : isLoggedIn(false), isGuest(false), isAdminLoggedIn(
     users = FileManager::loadUsers("data/users.txt");
 }
 
-// [FIX - 30/08/2026]: Man hinh chao mung dau tien (1. Dang nhap, 2. Dang ky, 3. Khach vang lai)
+// ============================================================================
+// 2. XAC THUC NGUOI DUNG (AUTHENTICATION & USER PROFILE)
+// ============================================================================
+
+// Man hinh chao mung ban dau: Cho phep Dang nhap, Dang ky, hoac Chon che do Khach vang lai
 bool OrderingApp::authMenu() {
     while (true) {
         cout << "\n===============================================================================\n";
@@ -66,7 +73,7 @@ bool OrderingApp::authMenu() {
     }
 }
 
-// [FIX - 31/08/2026]: Xu ly dang nhap ho tro ca Khach hang va Quan tri vien (admin / 123)
+// Xu ly dang nhap: Kiem tra tai khoan Admin (admin/123) hoac tai khoan Khach hang trong users.txt
 bool OrderingApp::loginUser() {
     cin.ignore(1000, '\n');
     cout << "\n--- DANG NHAP TAI KHOAN ---\n";
@@ -85,8 +92,8 @@ bool OrderingApp::loginUser() {
         isLoggedIn = false;
         isGuest = false;
         currentAdmin = Admin("Nguyen Van Admin", "0909999999", "admin@orderingapp.com", "admin", "123", "Quan tri vien he thong");
-        cout << "\n🎉 Dang nhap THANH CONG voi quyen QUAN TRI VIEN (ADMIN)!\n";
-        cout << "🔑 Chuc vu: " << currentAdmin.getAdminRole() << '\n';
+        cout << "\n[THANH CONG] Dang nhap voi quyen QUAN TRI VIEN (ADMIN)!\n";
+        cout << "Chuc vu: " << currentAdmin.getAdminRole() << '\n';
         return true;
     }
 
@@ -97,18 +104,18 @@ bool OrderingApp::loginUser() {
             isLoggedIn = true;
             isGuest = false;
             isAdminLoggedIn = false;
-            cout << "\n🎉 Dang nhap thanh cong! Xin chao " << u.getName() << "!\n";
-            cout << "💎 Hang thanh vien : " << u.getMembershipTier() << '\n';
-            cout << "⭐ Diem thuong      : " << u.getLoyaltyPoints() << " pts\n";
+            cout << "\n[THANH CONG] Dang nhap thanh cong! Xin chao " << u.getName() << "!\n";
+            cout << "Hang thanh vien : " << u.getMembershipTier() << '\n';
+            cout << "Diem thuong     : " << u.getLoyaltyPoints() << " pts\n";
             return true;
         }
     }
 
-    cout << "❌ [LOI] Sai ten dang nhap hoac mat khau!\n";
+    cout << "[LOI] Sai ten dang nhap hoac mat khau!\n";
     return false;
 }
 
-// [FIX - 30/08/2026]: Xu ly dang ky tai khoan thanh vien moi va luu vao users.txt
+// Xu ly dang ky tai khoan moi: Validate thong tin va luu vao data/users.txt
 bool OrderingApp::registerUser() {
     cin.ignore(1000, '\n');
     cout << "\n--- DANG KY TAI KHOAN MOI ---\n";
@@ -118,18 +125,18 @@ bool OrderingApp::registerUser() {
     username = trimString(username);
 
     if (username.empty()) {
-        cout << "❌ Tai khoan khong duoc de trong!\n";
+        cout << "[LOI] Tai khoan khong duoc de trong!\n";
         return false;
     }
 
     if (username == "admin") {
-        cout << "❌ [LOI] Ten tai khoan 'admin' la danh rieng cho he thong!\n";
+        cout << "[LOI] Ten tai khoan 'admin' la danh rieng cho he thong!\n";
         return false;
     }
 
     for (const auto& u : users) {
         if (u.getUsername() == username) {
-            cout << "❌ [LOI] Ten tai khoan nay da ton tai! Vui long chon ten khac.\n";
+            cout << "[LOI] Ten tai khoan nay da ton tai! Vui long chon ten khac.\n";
             return false;
         }
     }
@@ -158,11 +165,11 @@ bool OrderingApp::registerUser() {
     isGuest = false;
     isAdminLoggedIn = false;
 
-    cout << "\n🎉 Dang ky tai khoan thanh cong va tu dong dang nhap!\n";
+    cout << "\n[THANH CONG] Dang ky tai khoan thanh cong va tu dong dang nhap!\n";
     return true;
 }
 
-// [FIX - 30/08/2026]: Xem thong tin tai khoan, hang thanh vien va diem thuong
+// Xem thong tin ho so tai khoan, hang thanh vien va diem thuong tich luy
 void OrderingApp::viewProfile() {
     cout << "\n===============================================================================\n";
     cout << "                             THONG TIN TAI KHOAN                               \n";
@@ -183,7 +190,7 @@ void OrderingApp::viewProfile() {
     cout << "===============================================================================\n";
 }
 
-// [FIX - 30/08/2026]: Dang xuat tai khoan
+// Dang xuat: Reset trang thai phien lam viec
 void OrderingApp::logout() {
     isLoggedIn = false;
     isGuest = false;
@@ -193,7 +200,10 @@ void OrderingApp::logout() {
     cout << "\n-> Da dang xuat tai khoan thanh cong!\n";
 }
 
-// [FIX - 31/08/2026]: Vong lap dieu khien chinh - Phan nhanh Menu Admin va Menu Khach hang
+// ============================================================================
+// 3. VONG LAP DIEU KHIEN CHINH (MAIN APPLICATION CONTROLLER)
+// ============================================================================
+// Dieu phoi luong chuong trinh dua tren vai tro (Admin hoac Khach hang)
 void OrderingApp::run() {
     while (true) {
         if (!isLoggedIn && !isGuest && !isAdminLoggedIn) {
@@ -211,7 +221,10 @@ void OrderingApp::run() {
     }
 }
 
-// Menu danh cho Khach hang
+// ============================================================================
+// 4. PHAN HE KHACH HANG (CUSTOMER PORTAL)
+// ============================================================================
+// Menu chinh cho khach hang mua sam, xem gio hang, dat hang va tra cuu
 void OrderingApp::customerMenu() {
     int choice = -1;
     cout << "\n===============================================================================\n";
@@ -281,7 +294,10 @@ void OrderingApp::customerMenu() {
     }
 }
 
-// [FIX - 31/08/2026]: Menu danh rieng cho Quan tri vien (Admin Portal)
+// ============================================================================
+// 5. PHAN HE QUAN TRI VIEN (ADMIN PORTAL)
+// ============================================================================
+// Menu danh rieng cho Quan tri vien: Quan ly kho hang, Nguoi dung, Don hang va Doanh thu
 void OrderingApp::adminMenu() {
     int choice = -1;
     cout << "\n===============================================================================\n";
@@ -330,7 +346,7 @@ void OrderingApp::adminMenu() {
     }
 }
 
-// [FIX - 31/08/2026]: 1. Quan ly kho hang (Them / Sua / Nhap kho / Xoa)
+// 5.1 Quan ly kho hang: Them moi, Cap nhat don gia / Nhap kho, Xoa san pham va dong bo file
 void OrderingApp::adminManageInventory() {
     while (true) {
         cout << "\n--- [ADMIN] QUAN LY KHO HANG ---\n";
@@ -369,12 +385,12 @@ void OrderingApp::adminManageInventory() {
             getline(cin, id);
             id = trimString(id);
 
-            // Kiem tra trung ma
+            // Kiem tra trung ma san pham
             auto dupCheck = productManager.filter([&id](const shared_ptr<Product>& p) {
                 return p && p->getId() == id;
             });
             if (!dupCheck.empty()) {
-                cout << "❌ [LOI] Ma san pham '" << id << "' da ton tai trong he thong!\n";
+                cout << "[LOI] Ma san pham '" << id << "' da ton tai trong he thong!\n";
                 continue;
             }
 
@@ -416,9 +432,9 @@ void OrderingApp::adminManageInventory() {
             if (newProd) {
                 productManager.add(newProd);
                 FileManager::saveProducts(productManager.getAll(), "data/products.txt");
-                cout << "🎉 [THANH CONG] Da them san pham [" << id << " - " << name << "] va dong bo vao file products.txt!\n";
+                cout << "[THANH CONG] Da them san pham [" << id << " - " << name << "] va dong bo vao file products.txt!\n";
             }
-        } else if (opt == 2) { // Sua gia & Nhap kho
+        } else if (opt == 2) { // Sua gia & Nhap kho (Restock)
             cin.ignore(1000, '\n');
             cout << "Nhap Ma san pham can cap nhat: ";
             string id;
@@ -430,7 +446,7 @@ void OrderingApp::adminManageInventory() {
             });
 
             if (!pPtr || !(*pPtr)) {
-                cout << "❌ Khong tim thay ma san pham: " << id << '\n';
+                cout << "[LOI] Khong tim thay ma san pham: " << id << '\n';
                 continue;
             }
 
@@ -448,8 +464,8 @@ void OrderingApp::adminManageInventory() {
             if (addStock > 0) prod->setStockQuantity(prod->getStock() + addStock);
 
             FileManager::saveProducts(productManager.getAll(), "data/products.txt");
-            cout << "🎉 [THANH CONG] Da cap nhat thong tin san pham va dong bo vao file products.txt!\n";
-        } else if (opt == 3) { // Xoa san pham
+            cout << "[THANH CONG] Da cap nhat thong tin san pham va dong bo vao file products.txt!\n";
+        } else if (opt == 3) { // Xoa san pham khoi danh muc
             cin.ignore(1000, '\n');
             cout << "Nhap Ma san pham can XOA: ";
             string id;
@@ -467,15 +483,15 @@ void OrderingApp::adminManageInventory() {
             if (foundIdx != -1) {
                 productManager.remove(foundIdx);
                 FileManager::saveProducts(productManager.getAll(), "data/products.txt");
-                cout << "🎉 [THANH CONG] Da xoa san pham [" << id << "] khoi he thong!\n";
+                cout << "[THANH CONG] Da xoa san pham [" << id << "] khoi he thong!\n";
             } else {
-                cout << "❌ Khong tim thay ma san pham: " << id << '\n';
+                cout << "[LOI] Khong tim thay ma san pham: " << id << '\n';
             }
         }
     }
 }
 
-// [FIX - 31/08/2026]: 2. Quan ly khach hang (Danh sach / Cap diem VIP / Xoa tai khoan)
+// 5.2 Quan ly nguoi dung: Xem danh sach tai khoan, cap/tru diem VIP, xoa tai khoan
 void OrderingApp::adminManageUsers() {
     while (true) {
         cout << "\n===============================================================================================================\n";
@@ -514,7 +530,7 @@ void OrderingApp::adminManageUsers() {
 
         if (opt == 0) break;
 
-        if (opt == 1) { // Sua diem VIP
+        if (opt == 1) { // Chinh sua diem VIP cho khach hang
             cin.ignore(1000, '\n');
             cout << "Nhap Ten tai khoan (Username) muon chinh sua diem: ";
             string uname;
@@ -530,7 +546,7 @@ void OrderingApp::adminManageUsers() {
             }
 
             if (!target) {
-                cout << "❌ Khong tim thay tai khoan: " << uname << '\n';
+                cout << "[LOI] Khong tim thay tai khoan: " << uname << '\n';
                 continue;
             }
 
@@ -541,10 +557,10 @@ void OrderingApp::adminManageUsers() {
             if (newPts >= 0) {
                 target->setLoyaltyPoints(newPts);
                 FileManager::saveUsers(users, "data/users.txt");
-                cout << "🎉 [THANH CONG] Da cap nhat diem cho [" << uname << "] thanh " 
+                cout << "[THANH CONG] Da cap nhat diem cho [" << uname << "] thanh " 
                      << newPts << " pts (" << target->getMembershipTier() << ") va dong bo users.txt!\n";
             }
-        } else if (opt == 2) { // Xoa tai khoan
+        } else if (opt == 2) { // Xoa tai khoan khach hang
             cin.ignore(1000, '\n');
             cout << "Nhap Ten tai khoan (Username) muon XOA: ";
             string uname;
@@ -562,15 +578,15 @@ void OrderingApp::adminManageUsers() {
             if (it != users.end()) {
                 users.erase(it);
                 FileManager::saveUsers(users, "data/users.txt");
-                cout << "🎉 [THANH CONG] Da xoa tai khoan [" << uname << "] khoi he thong!\n";
+                cout << "[THANH CONG] Da xoa tai khoan [" << uname << "] khoi he thong!\n";
             } else {
-                cout << "❌ Khong tim thay tai khoan: " << uname << '\n';
+                cout << "[LOI] Khong tim thay tai khoan: " << uname << '\n';
             }
         }
     }
 }
 
-// [FIX - 31/08/2026]: 3. Giam sat don hang & Cap nhat trang thai giao hang
+// 5.3 Giam sat don hang: Xem toan bo don hang toan san, chi tiet hoa don, cap nhat trang thai
 void OrderingApp::adminManageOrders() {
     while (true) {
         if (orders.empty()) {
@@ -612,7 +628,7 @@ void OrderingApp::adminManageOrders() {
 
         if (opt == 0) break;
 
-        if (opt == 1) { // Xem chi tiet
+        if (opt == 1) { // Xem chi tiet don hang
             cin.ignore(1000, '\n');
             cout << "Nhap Ma don hang (vi du: ORD-1001): ";
             string id;
@@ -627,8 +643,8 @@ void OrderingApp::adminManageOrders() {
                     break;
                 }
             }
-            if (!found) cout << "❌ Khong tim thay don hang: " << id << '\n';
-        } else if (opt == 2) { // Cap nhat trang thai
+            if (!found) cout << "[LOI] Khong tim thay don hang: " << id << '\n';
+        } else if (opt == 2) { // Cap nhat trang thai don hang
             cin.ignore(1000, '\n');
             cout << "Nhap Ma don hang can cap nhat: ";
             string id;
@@ -644,7 +660,7 @@ void OrderingApp::adminManageOrders() {
             }
 
             if (!target) {
-                cout << "❌ Khong tim thay don hang: " << id << '\n';
+                cout << "[LOI] Khong tim thay don hang: " << id << '\n';
                 continue;
             }
 
@@ -663,13 +679,13 @@ void OrderingApp::adminManageOrders() {
             else if (stChoice == 4) target->setStatus("Cancelled");
 
             FileManager::rewriteAllOrders(orders, "data/orders.txt");
-            cout << "🎉 [THANH CONG] Da cap nhat trang thai don [" << id << "] thanh '" 
+            cout << "[THANH CONG] Da cap nhat trang thai don [" << id << "] thanh '" 
                  << target->getStatus() << "' va dong bo file orders.txt!\n";
         }
     }
 }
 
-// [FIX - 31/08/2026]: 4. Bao cao doanh thu & Top 3 san pham ban chay
+// 5.4 Bao cao doanh thu & Xep hang ban chay: Thong ke doanh thu theo nganh hang va Top 3 san pham
 void OrderingApp::adminViewAnalytics() {
     cout << "\n===============================================================================================================\n";
     cout << "                                      BAO CAO DOANH THU & THONG KE KINH DOANH                                  \n";
@@ -714,18 +730,18 @@ void OrderingApp::adminViewAnalytics() {
 
     double cancelRate = (totalOrdersCount > 0) ? (static_cast<double>(cancelledOrdersCount) / totalOrdersCount * 100.0) : 0.0;
 
-    cout << "  📊 TONG QUAN HOAT DONG KINH DOANH:\n";
+    cout << "  TONG QUAN HOAT DONG KINH DOANH:\n";
     cout << "  - Tong doanh thu thuc nhan  : " << fixed << setprecision(0) << totalRevenue << " VND\n";
     cout << "  - Tong so don hang da tao   : " << totalOrdersCount << " don\n";
     cout << "  - So don hop le / dang giao : " << successOrdersCount << " don\n";
     cout << "  - So don da bi huy          : " << cancelledOrdersCount << " don (Ty le huy: " << setprecision(1) << cancelRate << "%)\n";
     cout << "---------------------------------------------------------------------------------------------------------------\n";
-    cout << "  📦 DOANH THU THEO TUNG NGANH HANG:\n";
+    cout << "  DOANH THU THEO TUNG NGANH HANG:\n";
     cout << "  - Thuc pham (FOOD)          : " << fixed << setprecision(0) << setw(12) << foodRevenue << " VND\n";
     cout << "  - Thiet bi dien tu (ELEC)   : " << setw(12) << elecRevenue << " VND\n";
     cout << "  - Thoi trang / May mac      : " << setw(12) << clothRevenue << " VND\n";
     cout << "---------------------------------------------------------------------------------------------------------------\n";
-    cout << "  🏆 TOP 3 SAN PHAM BAN CHAY NHAT TOAN SAN:\n";
+    cout << "  TOP 3 SAN PHAM BAN CHAY NHAT TOAN SAN:\n";
 
     // Chuyen map thanh vector de sap xep
     vector<pair<string, pair<string, int>>> sortedSales(productSales.begin(), productSales.end());
@@ -748,7 +764,11 @@ void OrderingApp::adminViewAnalytics() {
     cout << "===============================================================================================================\n";
 }
 
-// [FIX - 30/08/2026]: In tieu de bang va dong phan cach thang hang dep mat cho danh sach san pham
+// ============================================================================
+// 6. CHUC NANG DANH CHO KHACH HANG (STORE FRONT & SHOPPING)
+// ============================================================================
+
+// Hien thi bang danh muc san pham toan bo he thong
 void OrderingApp::showProducts() {
     auto list = productManager.getAll();
     if (list.empty()) {
@@ -773,6 +793,7 @@ void OrderingApp::showProducts() {
     cout << "===============================================================================================================\n";
 }
 
+// Tim kiem san pham theo tu khoa ten bang bieu thuc Lambda
 void OrderingApp::searchProducts() {
     cin.ignore(1000, '\n');
     cout << "\nNhap ten san pham can tim: ";
@@ -798,13 +819,14 @@ void OrderingApp::searchProducts() {
          << " | " << setw(7) << "TON KHO"
          << " | THONG TIN CHI TIET\n";
     cout << "---------------------------------------------------------------------------------------------------------------\n";
+
     for (const auto& prod : results) {
         prod->displayInfo();
     }
     cout << "===============================================================================================================\n";
 }
 
-// [FIX - 30/08/2026]: Cho phep them nhieu san pham cung luc cach nhau boi dau phay (vi du: F01:2, E01:1, C01)
+// Them san pham vao gio hang: Ho tro nhap hang loat qua cu phap dau phay (vi du: F01:2, E01:1, C01)
 void OrderingApp::addToCart() {
     showProducts();
     cin.ignore(1000, '\n');
@@ -884,12 +906,13 @@ void OrderingApp::addToCart() {
     }
 }
 
+// Xem danh sach cac mat hang trong gio va tong tien
 void OrderingApp::viewCart() {
     cout << "\n--- CHI TIET GIO HANG ---\n";
     cout << cart;
 }
 
-// [FIX - 30/08/2026]: Dat hang tu dong ap dung Giam gia VIP, Voucher Freeship 20k diem va Tich diem thuong
+// Dat hang: Tu dong ap dung giam gia theo Hang VIP, Doi voucher Freeship, Chon thanh toan va Tich diem
 void OrderingApp::placeOrder() {
     if (cart.isEmpty()) {
         cout << "Gio hang dang trong! Vui long chon san pham truoc khi thanh toan.\n";
@@ -934,7 +957,7 @@ void OrderingApp::placeOrder() {
         currentCustomer = Customer("GUEST-" + to_string(orders.size() + 1), name, phone, email, address);
     }
 
-    // Xu ly doi diem Freeship
+    // Xu ly doi diem Freeship (20.000 diem doi mien phi van chuyen)
     bool useFreeship = false;
     if (isLoggedIn && currentCustomer.getLoyaltyPoints() >= 20000) {
         cout << "\n[UU DAI VIP]: Ban dang co " << currentCustomer.getLoyaltyPoints() 
@@ -947,7 +970,7 @@ void OrderingApp::placeOrder() {
         }
     }
 
-    // Chon phuong thuc thanh toan
+    // Chon phuong thuc thanh toan da hinh (Strategy Pattern: COD hoac Chuyen khoan TPBank)
     cout << "\n--- CHON PHUONG THUC THANH TOAN ---\n";
     cout << "1. Thanh toan tien mat khi nhan hang (COD)\n";
     cout << "2. Chuyen khoan Ngan hang (TPBank)\n";
@@ -976,10 +999,27 @@ void OrderingApp::placeOrder() {
     if (confirm == 'y' || confirm == 'Y') {
         orders.push_back(newOrder);
         FileManager::saveOrder(newOrder, "data/orders.txt");
-        cart.clear();
-        cout << "\n🎉 DAT HANG THANH CONG!\n";
 
-        // Tich diem thuong cho tai khoan thanh vien
+        // Tru so luong ton kho va dong bo ngay vao data/products.txt
+        for (const auto& item : newOrder.getItems()) {
+            if (item.getProduct()) {
+                string prodId = item.getProduct()->getId();
+                auto prodPtr = productManager.find([&prodId](const shared_ptr<Product>& p) {
+                    return p && p->getId() == prodId;
+                });
+                if (prodPtr && *prodPtr) {
+                    int curStock = (*prodPtr)->getStockQuantity();
+                    int rem = (curStock >= item.getQuantity()) ? (curStock - item.getQuantity()) : 0;
+                    (*prodPtr)->setStockQuantity(rem);
+                }
+            }
+        }
+        FileManager::saveProducts(productManager.getAll(), "data/products.txt");
+
+        cart.clear();
+        cout << "\n[THANH CONG] DAT HANG THANH CONG!\n";
+
+        // Tich diem thuong cho tai khoan thanh vien (10.000 VND = 1 diem)
         if (isLoggedIn) {
             int earned = newOrder.getEarnedPoints();
             currentCustomer.addLoyaltyPoints(earned);
@@ -993,8 +1033,8 @@ void OrderingApp::placeOrder() {
             }
             FileManager::saveUsers(users, "data/users.txt");
 
-            cout << "⭐ Ban duoc cong them: +" << earned << " diem thuong!\n";
-            cout << "💎 Tong diem hien tai: " << currentCustomer.getLoyaltyPoints() 
+            cout << "Ban duoc cong them: +" << earned << " diem thuong!\n";
+            cout << "Tong diem hien tai: " << currentCustomer.getLoyaltyPoints() 
                  << " pts (" << currentCustomer.getMembershipTier() << ")\n";
         }
     } else {
@@ -1006,6 +1046,7 @@ void OrderingApp::placeOrder() {
     }
 }
 
+// Xem lich su toan bo don hang da dat trong phien lam viec
 void OrderingApp::viewOrderHistory() {
     if (orders.empty()) {
         cout << "Lich su don hang trong!\n";
@@ -1021,7 +1062,7 @@ void OrderingApp::viewOrderHistory() {
     }
 }
 
-// [FIX - 30/08/2026]: Bo sung chuc nang Huy don hang (COD huy ngay, Chuyen khoan hoan tien trong 24h va tu dong hoan tra ton kho)
+// Huy don hang: Tu dong hoan tra ton kho san pham, hoan tien chuyen khoan va thu hoi/hoan tra diem VIP
 void OrderingApp::cancelOrder() {
     if (orders.empty()) {
         cout << "Hien tai chua co don hang nao trong he thong de huy!\n";
@@ -1088,8 +1129,10 @@ void OrderingApp::cancelOrder() {
             }
         }
     }
+    // Dong bo ngay kho hang vao products.txt sau khi hoan tra
+    FileManager::saveProducts(productManager.getAll(), "data/products.txt");
 
-    // Kiem tra phuong thuc thanh toan
+    // Kiem tra phuong thuc thanh toan de xu ly hoan tien
     auto pm = foundOrder->getPaymentMethod();
     bool isBankTransfer = (pm && pm->getMethodName().find("TPBank") != string::npos);
 
@@ -1116,7 +1159,7 @@ void OrderingApp::cancelOrder() {
         cout << "  =================================================================================\n";
     }
 
-    // [FIX - 31/08/2026]: Thu hoi diem tich luy va hoan tra diem voucher Freeship cho tai khoan thanh vien
+    // Thu hoi diem tich luy va hoan tra diem voucher Freeship cho tai khoan thanh vien
     string buyerUsername = foundOrder->getCustomer().getUsername();
     if (!buyerUsername.empty()) {
         int earnedPts = foundOrder->getEarnedPoints();

@@ -15,3 +15,35 @@ PHI GIAO HANG    : 0 VND
 TONG THANH TOAN  : 2124990 VND
 =========================================================
 
+MA DON HANG      : ORD-1001
+NGAY DAT         : 05/09/2026
+NGAY GIAO DU KIEN: 08/09/2026
+TRANG THAI       : Confirmed
+PHUONG THUC TT   : Chuyen khoan Ngan hang (TPBank)
+CHI TIET TT      : TPBank | STK: 000000001 | Chu TK: HKD NHOM3 ORDERAPP | ND: ORD-1001
+TEN KHACH HANG   : 1
+SO DIEN THOAI    : 1
+EMAIL            : 1
+DIA CHI          : TN
+DANH SACH SAN PHAM:
+  - E01 | Tai nghe Sony | So luong: 10 | Don gia: 367500 VND | Thanh tien: 3675000 VND
+PHI GIAO HANG    : 0 VND
+TONG THANH TOAN  : 3675000 VND
+=========================================================
+
+MA DON HANG      : ORD-1002
+NGAY DAT         : 05/09/2026
+NGAY GIAO DU KIEN: 08/09/2026
+TRANG THAI       : Confirmed
+PHUONG THUC TT   : Chuyen khoan Ngan hang (TPBank)
+CHI TIET TT      : TPBank | STK: 000000001 | Chu TK: HKD NHOM3 ORDERAPP | ND: ORD-1002
+TEN KHACH HANG   : 1
+SO DIEN THOAI    : 1
+EMAIL            : 
+DIA CHI          : 11
+DANH SACH SAN PHAM:
+  - E01 | Tai nghe Sony | So luong: 1 | Don gia: 367500 VND | Thanh tien: 367500 VND
+PHI GIAO HANG    : 25000 VND
+TONG THANH TOAN  : 392500 VND
+=========================================================
+

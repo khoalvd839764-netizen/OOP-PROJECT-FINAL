@@ -35,8 +35,9 @@ oop final project/
 │   │   ├── Person.h / .cpp
 │   │   ├── Customer.h / .cpp
 │   │   └── Admin.h / .cpp
-│   └── products/            # Danh mục sản phẩm đa hình (Product, Food, Elec, Cloth)
+│   └── products/            # Danh mục sản phẩm đa hình & Đa kế thừa
 │       ├── Product.h / .cpp
+│       ├── ITaxable.h       # Interface Thuế VAT (Đa kế thừa)
 │       ├── FoodProduct.h / .cpp
 │       ├── ElectronicsProduct.h / .cpp
 │       └── ClothingProduct.h / .cpp
@@ -112,9 +113,16 @@ classDiagram
         +displayInfo() void
         +calculateFinalPrice() double (+10% Silk/Leather)
     }
-    Product <|-- FoodProduct : Kế thừa
-    Product <|-- ElectronicsProduct : Kế thừa
-    Product <|-- ClothingProduct : Kế thừa
+    class ITaxable {
+        <<Interface>>
+        +getVATRate()* double
+        +calculateVAT()* double
+        +displayTaxInfo()* void
+    }
+    Product <|-- FoodProduct : Đơn kế thừa
+    Product <|-- ElectronicsProduct : Kế thừa (Lớp cha 1)
+    ITaxable <|-- ElectronicsProduct : Đa kế thừa (Lớp cha 2)
+    Product <|-- ClothingProduct : Đơn kế thừa
 
     %% Payment Strategy
     class PaymentMethod {
@@ -231,6 +239,7 @@ Hệ thống cung cấp **2 Phân hệ Giao diện chuyên biệt**:
 | **7. Strategy Pattern** | `models/payment/PaymentMethod.h` | Tách biệt các thuật toán thanh toán (COD, TPBank) thành các lớp chiến lược độc lập, giúp hoán đổi phương thức thanh toán linh hoạt mà không cần sửa lớp `Order`. |
 | **8. Nạp Chồng Toán Tử (Operator Overloading)** | `==`, `<`, `+=`, `[]`, `<<`, `>>` | So sánh sản phẩm theo ID (`==`), so sánh giá (`<`), thêm món vào giỏ (`+=`), truy xuất phần tử theo chỉ mục (`[]`), xuất/nhập luồng bảng dữ liệu (`<<`, `>>`). |
 | **9. Nguyên Lý SOLID** | - **OCP (Open-Closed):** Mở rộng thêm sản phẩm/phương thức thanh toán mới mà không sửa mã nguồn lớp `Order`.<br>- **LSP (Liskov Substitution):** Các lớp con thay thế hoàn hảo cho lớp cha.<br>- **SRP (Single Responsibility):** Tách biệt rành mạch tầng Lưu trữ, tầng Quản lý, tầng Mô hình và tầng Giao diện. |
+| **10. Đa Kế Thừa (Multiple Inheritance)** | `class ElectronicsProduct : public Product, public ITaxable` | Áp dụng mô hình Interface/Mixin chuẩn C++: `ElectronicsProduct` vừa kế thừa thuộc tính hàng hóa từ `Product` vừa kế thừa quy chuẩn thuế từ Interface `ITaxable` (VAT 10%). Thiết kế này **tránh hoàn toàn Vấn đề Kim Cương (The Diamond Problem)**. |
 
 ---
 

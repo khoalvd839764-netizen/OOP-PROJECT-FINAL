@@ -12,13 +12,47 @@
 #include <string>
 #include <vector>
 
+static std::string getDataPrefix() {
+    static std::string basePrefix = "";
+    static bool resolved = false;
+    if (resolved) return basePrefix;
+
+    const std::vector<std::string> candidates = {
+        "",
+        "Source code/",
+        "../",
+        "../../",
+        "../../../",
+        "../Source code/",
+        "../../Source code/"
+    };
+
+    for (const auto& c : candidates) {
+        std::ifstream f(c + "data/products.txt");
+        if (f.is_open()) {
+            basePrefix = c;
+            resolved = true;
+            return basePrefix;
+        }
+    }
+    resolved = true;
+    return "";
+}
+
+static std::string resolvePath(const std::string& filename) {
+    std::ifstream f(filename);
+    if (f.is_open()) return filename;
+    return getDataPrefix() + filename;
+}
+
 std::vector<std::shared_ptr<Product>> FileManager::loadProducts(
     const std::string& filename) {
+    std::string resolvedFile = resolvePath(filename);
     std::vector<std::shared_ptr<Product>> products;
-    std::ifstream inputFile(filename);
+    std::ifstream inputFile(resolvedFile);
 
     if (!inputFile.is_open()) {
-        std::cerr << "Khong the mo file san pham: " << filename << '\n';
+        std::cerr << "Khong the mo file san pham: " << resolvedFile << '\n';
         return products;
     }
 
@@ -84,10 +118,11 @@ std::vector<std::shared_ptr<Product>> FileManager::loadProducts(
 }
 
 void FileManager::saveOrder(const Order& order, const std::string& filename) {
-    std::ofstream outputFile(filename, std::ios::app);
+    std::string resolvedFile = resolvePath(filename);
+    std::ofstream outputFile(resolvedFile, std::ios::app);
 
     if (!outputFile.is_open()) {
-        std::cerr << "Khong the mo file de luu don hang: " << filename << '\n';
+        std::cerr << "Khong the mo file de luu don hang: " << resolvedFile << '\n';
         return;
     }
 
@@ -132,10 +167,11 @@ void FileManager::saveOrder(const Order& order, const std::string& filename) {
 
 // [FIX - 30/08/2026]: Ghi de toan bo danh sach don hang khi co cap nhat trang thai huy
 void FileManager::rewriteAllOrders(const std::vector<Order>& orders, const std::string& filename) {
-    std::ofstream outputFile(filename, std::ios::trunc);
+    std::string resolvedFile = resolvePath(filename);
+    std::ofstream outputFile(resolvedFile, std::ios::trunc);
 
     if (!outputFile.is_open()) {
-        std::cerr << "Khong the mo file de cap nhat don hang: " << filename << '\n';
+        std::cerr << "Khong the mo file de cap nhat don hang: " << resolvedFile << '\n';
         return;
     }
 
@@ -181,11 +217,12 @@ void FileManager::rewriteAllOrders(const std::vector<Order>& orders, const std::
 
 // [FIX - 30/08/2026]: Doc danh sach tai khoan nguoi dung tu file users.txt
 std::vector<Customer> FileManager::loadUsers(const std::string& filename) {
+    std::string resolvedFile = resolvePath(filename);
     std::vector<Customer> users;
-    std::ifstream inputFile(filename);
+    std::ifstream inputFile(resolvedFile);
 
     if (!inputFile.is_open()) {
-        std::cerr << "Khong the mo file nguoi dung: " << filename << '\n';
+        std::cerr << "Khong the mo file nguoi dung: " << resolvedFile << '\n';
         return users;
     }
 
@@ -226,10 +263,11 @@ std::vector<Customer> FileManager::loadUsers(const std::string& filename) {
 
 // [FIX - 30/08/2026]: Ghi danh sach tai khoan nguoi dung vao file users.txt
 void FileManager::saveUsers(const std::vector<Customer>& users, const std::string& filename) {
-    std::ofstream outputFile(filename, std::ios::trunc);
+    std::string resolvedFile = resolvePath(filename);
+    std::ofstream outputFile(resolvedFile, std::ios::trunc);
 
     if (!outputFile.is_open()) {
-        std::cerr << "Khong the mo file de luu nguoi dung: " << filename << '\n';
+        std::cerr << "Khong the mo file de luu nguoi dung: " << resolvedFile << '\n';
         return;
     }
 
@@ -249,10 +287,11 @@ void FileManager::saveUsers(const std::vector<Customer>& users, const std::strin
 
 // [FIX - 31/08/2026]: Ghi de toan bo danh sach san pham vao data/products.txt khi Admin them/sua/xoa san pham
 void FileManager::saveProducts(const std::vector<std::shared_ptr<Product>>& products, const std::string& filename) {
-    std::ofstream outputFile(filename, std::ios::trunc);
+    std::string resolvedFile = resolvePath(filename);
+    std::ofstream outputFile(resolvedFile, std::ios::trunc);
 
     if (!outputFile.is_open()) {
-        std::cerr << "Khong the mo file de luu danh muc san pham: " << filename << '\n';
+        std::cerr << "Khong the mo file de luu danh muc san pham: " << resolvedFile << '\n';
         return;
     }
 

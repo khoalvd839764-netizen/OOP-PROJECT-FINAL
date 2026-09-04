@@ -5,10 +5,12 @@ ordering_app
 
 # Object & Build Files
 build/
+out/
 *.o
 *.obj
 
 # IDE & Editor files
+.vs/
 .vscode/
 .gemini/
 .idea/
